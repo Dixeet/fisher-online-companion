@@ -1,4 +1,5 @@
 node_modules/
 .idea/
-extract/*
-!extract/.gitkeep
+parsers/extract/*
+parsers/!extract/**/*.gitkeep
+parsers/.tmp/

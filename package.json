@@ -2,9 +2,12 @@
   "name": "fisher-online-companion",
   "version": "0.1.0",
   "description": "FOC - Fisher Online Companion",
-  "main": "index.js",
+  "main": "parsers/parse.js",
+  "type": "module",
   "scripts": {
-    "lint": "eslint --ext .js,.ts,.vue --ignore-path .gitignore ."
+    "cleanup": "find parsers/.tmp/ ! -name '.gitkeep' -type f -exec rm -rf {} +",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore\"",
+    "prettier": "prettier . --write --ignore-path ./package-lock.json"
   },
   "repository": {
     "type": "git",
@@ -16,21 +19,36 @@
     "url": "https://github.com/Dixeet/fisher-online-companion/issues"
   },
   "homepage": "https://github.com/Dixeet/fisher-online-companion#readme",
-  "devDependencies": {
-    "eslint": "^8.50.0",
-    "eslint-config-prettier": "^9.0.0",
-    "prettier": "^3.0.3"
-  },
   "eslintConfig": {
     "root": true,
     "env": {
       "browser": true,
-      "es2021": true,
+      "es2022": true,
       "node": true
+    },
+    "parserOptions": {
+      "sourceType": "module",
+      "ecmaVersion": "latest"
     },
     "extends": [
       "eslint:recommended",
       "prettier"
     ]
+  },
+  "prettier": {
+    "semi": true,
+    "printWidth": 100,
+    "singleQuote": true
+  },
+  "devDependencies": {
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "prettier": "^3.0.3"
+  },
+  "dependencies": {
+    "command-line-args": "^5.2.1",
+    "n-readlines": "^1.0.1",
+    "nodemon": "^3.0.1",
+    "xml2js": "^0.6.2"
   }
 }
