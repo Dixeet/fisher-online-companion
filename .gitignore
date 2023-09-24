@@ -3,3 +3,5 @@ node_modules/
 parsers/extract/*
 parsers/!extract/**/*.gitkeep
 parsers/.tmp/
+dist
+dist-ssr
