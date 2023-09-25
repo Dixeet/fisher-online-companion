@@ -30,6 +30,10 @@ export default async function parseWeapons(options = DEFAULT_OPTIONS) {
       writeFile(options.to.weaponTypesPath, JSON.stringify(weaponTypes)),
     ]);
   }
+  return {
+    weapons,
+    weaponTypes,
+  };
 }
 
 async function read(weaponsTxtPath, weaponsXmlPath) {

@@ -3,6 +3,7 @@ import { resolve } from 'node:path';
 import commandLineArgs from 'command-line-args';
 import commandLineUsage from 'command-line-usage';
 import parseWeapons from './weapons.js';
+import parseFishes from './fish.js';
 
 const DEFAULT = {
   outputDir: './parsers/.tmp/',
@@ -11,6 +12,8 @@ const DEFAULT = {
   weaponsXmlFile: 'WpnLang.xml',
   weapons: 'weapons.json',
   weaponTypes: 'weapon-types.json',
+  fishTxtFile: 'fishLang.txt',
+  fishes: 'fishes.json',
 };
 
 const optionDefinitions = [
@@ -58,6 +61,18 @@ const optionDefinitions = [
     type: String,
     description: 'Path of weapons xml file source to parse',
   },
+  {
+    name: 'fishes-out',
+    alias: 'f',
+    type: String,
+    description: 'Path of generated fishes json file',
+  },
+  {
+    name: 'fishes-text-source',
+    alias: 'F',
+    type: String,
+    description: 'Path of fishes text file source to parse',
+  },
 ];
 const argv = commandLineArgs(optionDefinitions);
 
@@ -69,6 +84,9 @@ const options = {
     weaponsXmlPath: argv['weapons-lang-source']
       ? getPath(argv['weapons-lang-source'])
       : getPath(argv['source-dir'], DEFAULT.weaponsXmlFile),
+    fishTxtPath: argv['fishes-text-source']
+      ? getPath(argv['fishes-text-source'])
+      : getPath(argv['source-dir'], DEFAULT.fishTxtFile),
   },
   to: {
     weaponsPath: argv['weapons-out']
@@ -77,10 +95,14 @@ const options = {
     weaponTypesPath: argv['weapon-types-out']
       ? getPath(argv['weapon-types-out'])
       : getPath(argv['output-dir'], DEFAULT.weaponTypes),
+    fishesPath: argv['fishes-out']
+      ? getPath(argv['fishes-out'])
+      : getPath(argv['output-dir'], DEFAULT.fishes),
   },
 };
 if (!argv.help) {
   parseWeapons(options);
+  parseFishes(options);
 } else {
   const sections = [
     {
