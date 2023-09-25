@@ -36,7 +36,7 @@ function read(fishTxtPath) {
     if (find && find[1] && find[1] !== 'OFF' && find[0] > 0) {
       fishes.push({
         id: find[0],
-        name: find[1],
+        name: find[1].trim(),
       });
     }
   }

@@ -3,7 +3,8 @@ import { resolve } from 'node:path';
 import commandLineArgs from 'command-line-args';
 import commandLineUsage from 'command-line-usage';
 import parseWeapons from './weapons.js';
-import parseFishes from './fish.js';
+import parseFishes from './fishes.js';
+import parseMaps from './maps.js';
 
 const DEFAULT = {
   outputDir: './parsers/.tmp/',
@@ -14,6 +15,8 @@ const DEFAULT = {
   weaponTypes: 'weapon-types.json',
   fishTxtFile: 'fishLang.txt',
   fishes: 'fishes.json',
+  mapsTxtFile: 'maps.txt',
+  maps: 'maps.json',
 };
 
 const optionDefinitions = [
@@ -73,6 +76,18 @@ const optionDefinitions = [
     type: String,
     description: 'Path of fishes text file source to parse',
   },
+  {
+    name: 'maps-out',
+    alias: 'm',
+    type: String,
+    description: 'Path of generated maps json file',
+  },
+  {
+    name: 'maps-text-source',
+    alias: 'M',
+    type: String,
+    description: 'Path of maps text file source to parse',
+  },
 ];
 const argv = commandLineArgs(optionDefinitions);
 
@@ -87,6 +102,9 @@ const options = {
     fishTxtPath: argv['fishes-text-source']
       ? getPath(argv['fishes-text-source'])
       : getPath(argv['source-dir'], DEFAULT.fishTxtFile),
+    mapsTxtPath: argv['maps-text-source']
+      ? getPath(argv['maps-text-source'])
+      : getPath(argv['source-dir'], DEFAULT.mapsTxtFile),
   },
   to: {
     weaponsPath: argv['weapons-out']
@@ -98,11 +116,15 @@ const options = {
     fishesPath: argv['fishes-out']
       ? getPath(argv['fishes-out'])
       : getPath(argv['output-dir'], DEFAULT.fishes),
+    mapsPath: argv['maps-out']
+      ? getPath(argv['maps-out'])
+      : getPath(argv['output-dir'], DEFAULT.maps),
   },
 };
 if (!argv.help) {
   parseWeapons(options);
   parseFishes(options);
+  parseMaps(options);
 } else {
   const sections = [
     {
