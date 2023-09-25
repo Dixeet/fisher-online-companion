@@ -8,6 +8,9 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "clean:vite": "rm -rf .cache/* components.d.ts",
+    "clean:parse": "rm -rf parsers/.tmp/*",
+    "parse": "node parsers/parse.js",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore\"",
     "prettier": "prettier . --write --ignore-path ./package-lock.json"
   },
@@ -44,10 +47,15 @@
     "singleQuote": true
   },
   "devDependencies": {
+    "@iconify-json/game-icons": "^1.1.3",
+    "@iconify-json/mdi": "^1.1.54",
     "@vitejs/plugin-vue": "^4.2.3",
+    "@vue/compiler-sfc": "^3.3.4",
     "eslint": "^8.50.0",
     "eslint-config-prettier": "^9.0.0",
     "prettier": "^3.0.3",
+    "unplugin-icons": "^0.17.0",
+    "unplugin-vue-components": "^0.25.2",
     "vite": "^4.4.8"
   },
   "dependencies": {
@@ -57,7 +65,9 @@
     "n-readlines": "^1.0.1",
     "nodemon": "^3.0.1",
     "sass": "^1.68.0",
+    "vite-plugin-vuetify": "^1.0.2",
     "vue": "^3.3.4",
+    "vuetify": "^3.3.17",
     "xml2js": "^0.6.2"
   }
 }
