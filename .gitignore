@@ -7,3 +7,9 @@ dist
 dist-ssr
 components.d.ts
 .cache
+src/components/*Test*.vue
+
+### Comment next line to push images
+src/assets/images/*/*
+###
+!src/assets/images/**/*.gitkeep
