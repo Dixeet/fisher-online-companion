@@ -18,12 +18,20 @@
       </v-list>
     </v-navigation-drawer>
 
+    <v-progress-linear
+      :active="active"
+      indeterminate
+      absolute
+      color="primary"
+      style="z-index: 2000"
+    ></v-progress-linear>
+
     <v-main>
       <v-container>
         <RouterView v-slot="{ Component }">
           <template v-if="Component">
             <Transition mode="out-in">
-              <Suspense>
+              <Suspense @pending="active = true" @resolve="active = false">
                 <component :is="Component"></component>
               </Suspense>
             </Transition>
@@ -33,3 +41,8 @@
     </v-main>
   </v-layout>
 </template>
+<script setup>
+import { useState } from '~/composables/useState.js';
+
+const active = useState('globalPending', false);
+</script>
