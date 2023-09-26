@@ -1,5 +1,5 @@
 <template>
-  <v-btn density="default" size="small" :icon="IconBack" @click="back" />
+  <v-btn density="default" size="small" :icon="IconBack" @click.stop="back" />
 </template>
 
 <script setup>
