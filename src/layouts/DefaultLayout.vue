@@ -1,16 +1,8 @@
 <template>
   <v-layout>
-    <v-navigation-drawer v-model="drawerLeft">
-      <v-list>
-        <v-list-item title="Rigs" to="/rigs"></v-list-item>
-      </v-list>
-    </v-navigation-drawer>
+    <TheLeftDrawer v-model="drawerLeft" />
 
-    <v-navigation-drawer v-model="drawerRight" location="right">
-      <v-list>
-        <v-list-item title="Drawer right"></v-list-item>
-      </v-list>
-    </v-navigation-drawer>
+    <TheRightDrawer v-model="drawerRight" />
 
     <v-app-bar elevation="1" density="compact">
       <template #prepend>
