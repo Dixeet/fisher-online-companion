@@ -28,15 +28,7 @@
 
     <v-main>
       <v-container>
-        <RouterView v-slot="{ Component }">
-          <template v-if="Component">
-            <Transition mode="out-in">
-              <Suspense @pending="active = true" @resolve="active = false">
-                <component :is="Component"></component>
-              </Suspense>
-            </Transition>
-          </template>
-        </RouterView>
+        <slot />
       </v-container>
     </v-main>
   </v-layout>
