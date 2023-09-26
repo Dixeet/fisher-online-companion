@@ -27,7 +27,7 @@ export default async function parseXml(path) {
     name: [name],
     info: [info],
   } of weaponsXML) {
-    if (name !== '--' && !name.startsWith('\r\n')) {
+    if (!name.startsWith('--') && !name.startsWith('\r\n')) {
       weapons.push({
         id,
         name,
