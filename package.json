@@ -70,6 +70,7 @@
     "sass": "^1.68.0",
     "vite-plugin-vuetify": "^1.0.2",
     "vue": "^3.3.4",
+    "vue-router": "^4.2.5",
     "vuetify": "^3.3.17",
     "xml2js": "^0.6.2"
   }

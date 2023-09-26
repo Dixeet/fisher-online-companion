@@ -1,7 +1,6 @@
 <template>
-  <DefaultLayout></DefaultLayout>
+  <div>Test</div>
 </template>
 
 <script setup></script>
-
 <style></style>

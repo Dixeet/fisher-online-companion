@@ -1,5 +1,5 @@
 <template>
-  <DefaultLayout></DefaultLayout>
+  <div>Detail</div>
 </template>
 
 <script setup></script>
