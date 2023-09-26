@@ -1,12 +1,7 @@
 <template>
-  <DefaultLayout>
-    <div>Test</div>
-    <div>
-      <v-icon size="small">
-        <IGameWireCoil />
-      </v-icon>
-    </div>
-  </DefaultLayout>
+  <suspense>
+    <DefaultLayout> </DefaultLayout>
+  </suspense>
 </template>
 
 <script setup></script>

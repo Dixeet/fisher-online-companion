@@ -33,7 +33,13 @@ function read(fishTxtPath) {
   while ((line = liner.next())) {
     const str = line.toString();
     const find = str.match(/.?\d+(?=_Name=|_Name = )|(?<=_Name=|_Name = ).*/g);
-    if (find && find[1] && find[1] !== 'OFF' && find[0] > 0) {
+    if (
+      find &&
+      find[1] &&
+      find[1] !== 'OFF' &&
+      find[0] > 0 &&
+      fishes.findIndex((f) => f.id === find[0]) === -1
+    ) {
       fishes.push({
         id: find[0],
         name: find[1].trim(),
