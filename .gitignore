@@ -7,3 +7,4 @@ dist
 dist-ssr
 components.d.ts
 .cache
+src/components/*Test*.vue
