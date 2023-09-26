@@ -1,5 +1,6 @@
 import { initDixie } from '~/composables/database.js';
 import { useFetch } from '@vueuse/core';
+import { useState } from '~/composables/useState.js';
 
 const DEFAULT_CONFIG = { name: 'FisherOnlineCompanion', dixieConfig: {} };
 const dataToFetch = [
@@ -21,6 +22,8 @@ export default {
 
 function onReady(db) {
   db.on('ready', (db) => {
+    const pending = useState('globalPending', true);
+    pending.value = true;
     const promises = [];
     dataToFetch.forEach(({ file, table }) => {
       promises.push(
@@ -34,7 +37,7 @@ function onReady(db) {
         }),
       );
     });
-    return Promise.all(promises);
+    return Promise.all(promises).then(() => (pending.value = false));
   });
 }
 
