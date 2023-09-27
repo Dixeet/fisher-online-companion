@@ -1,6 +1,5 @@
 import { writeFile } from 'node:fs/promises';
 import lineByLine from 'n-readlines';
-import additionalMapsData from './additionalMapsData.js';
 
 const DEFAULT_OPTIONS = {
   from: {
@@ -40,9 +39,6 @@ function read(mapsTxtPath) {
         name: find[1].trim(),
         availableFishes: [],
       };
-      if (additionalMapsData[fish.id]) {
-        fish = { ...fish, ...additionalMapsData[fish.id] };
-      }
       maps.push(fish);
     }
   }

@@ -50,4 +50,17 @@ function migrate(db) {
     fishes: '++id,name',
     maps: '++id,name',
   });
+  /*
+  To refresh with new data,
+  use code below and increment VERSION_NUMBER according to the previous one
+
+  db.version(VERSION_NUMBER).upgrade((tx) => {
+    const promises = [];
+    dataToFetch.forEach(({ table }) => {
+      promises.push(tx.table(table).toCollection().delete());
+    });
+    return Promise.all(promises);
+  });
+
+*/
 }

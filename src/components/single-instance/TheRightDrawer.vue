@@ -1,8 +1,6 @@
 <template>
-  <v-navigation-drawer v-model="open" location="right">
-    <v-list>
-      <v-list-item title="Drawer right"></v-list-item>
-    </v-list>
+  <v-navigation-drawer v-model="open" width="285" location="right">
+    <TheMapSelector> </TheMapSelector>
   </v-navigation-drawer>
 </template>
 
