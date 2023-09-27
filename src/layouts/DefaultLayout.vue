@@ -15,7 +15,7 @@
         <ButtonBack />
       </template>
 
-      <v-app-bar-title class="text-body-1 text-align--center d-none d-sm-block">
+      <v-app-bar-title :class="classObj" class="text-body-1 text-align--center d-none d-sm-block">
         {{ title }}
       </v-app-bar-title>
 
@@ -31,7 +31,7 @@
     </v-app-bar>
 
     <v-main>
-      <v-container>
+      <v-container :class="classObj">
         <slot />
       </v-container>
     </v-main>
@@ -40,9 +40,20 @@
 <script setup>
 import IconToolbox from '~icons/game-icons/toolbox';
 import { useState } from '~/composables/useState.js';
-import { ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 
 const title = useState('title');
 const drawerLeft = ref(true);
 const drawerRight = ref(true);
+const animate = ref(false);
+
+const classObj = computed(() => ({
+  'fade-enter-from': animate.value,
+  'fade-enter-active': !animate.value,
+}));
+
+watch(title, () => {
+  animate.value = true;
+  setTimeout(() => (animate.value = false));
+});
 </script>

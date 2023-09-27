@@ -8,7 +8,7 @@
   ></v-progress-linear>
   <RouterView v-slot="{ Component }">
     <template v-if="Component">
-      <Transition mode="out-in">
+      <Transition name="fade" mode="out-in">
         <Suspense @pending="active = true" @resolve="active = false">
           <component :is="Component"></component>
         </Suspense>
