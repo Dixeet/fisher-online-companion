@@ -1,6 +1,7 @@
-import { initDixie } from '~/composables/database.js';
+import { initDb } from '~/composables/useDb.js';
 import { useFetch } from '@vueuse/core';
 import { useState } from '~/composables/useState.js';
+import Dexie from 'dexie';
 
 const DEFAULT_CONFIG = { name: 'FisherOnlineCompanion', dixieConfig: {} };
 const dataToFetch = [
@@ -13,7 +14,8 @@ const dataToFetch = [
 export default {
   install: (app, config = DEFAULT_CONFIG) => {
     config = { ...DEFAULT_CONFIG, ...config };
-    const db = initDixie(config.name, config.dixieConfig);
+    const db = new Dexie(config.name, config.dixieConfig);
+    initDb(db);
     onReady(db);
     migrate(db);
     db.open();
