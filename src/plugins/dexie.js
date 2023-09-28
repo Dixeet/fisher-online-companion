@@ -1,5 +1,4 @@
-import { initDb } from '~/composables/useDb.js';
-import { useFetch } from '@vueuse/core';
+import { initDb, useFetchDbData } from '~/composables/useDb.js';
 import { useState } from '~/composables/useState.js';
 import Dexie from 'dexie';
 
@@ -15,6 +14,7 @@ export default {
   install: (app, config = DEFAULT_CONFIG) => {
     config = { ...DEFAULT_CONFIG, ...config };
     const db = new Dexie(config.name, config.dixieConfig);
+    app.provide('database', { name: config.name, dataToFetch });
     initDb(db);
     onReady(db);
     migrate(db);
@@ -23,23 +23,11 @@ export default {
 };
 
 function onReady(db) {
-  db.on('ready', (db) => {
+  db.on('ready', () => {
     const pending = useState('globalPending', true);
     pending.value = true;
-    const promises = [];
-    dataToFetch.forEach(({ file, table }) => {
-      promises.push(
-        db[table].count((count) => {
-          if (!count) {
-            console.log(`Fetching ${file}...`);
-            return useFetch(`${import.meta.env.BASE_URL}data/${file}.json`).then(({ data }) => {
-              return db[table].bulkAdd(JSON.parse(data.value));
-            });
-          }
-        }),
-      );
-    });
-    return Promise.all(promises).then(() => (pending.value = false));
+    const promises = useFetchDbData(dataToFetch);
+    return promises.then(() => (pending.value = false));
   });
 }
 

@@ -3,6 +3,9 @@
     <v-list>
       <v-list-item title="Rigs" to="/rigs"></v-list-item>
     </v-list>
+    <template #append>
+      <TheDatabaseManager />
+    </template>
   </v-navigation-drawer>
 </template>
 
