@@ -1,4 +1,5 @@
 import 'vuetify/styles';
+import '~/assets/styles/main.scss';
 import { createVuetify } from 'vuetify';
 import { aliases, mdi } from 'vuetify/iconsets/mdi-svg';
 
