@@ -1,8 +1,16 @@
 <template>
   <v-layout>
-    <TheLeftDrawer v-model="drawerLeft" />
+    <TheLeftDrawer
+      v-model="drawerLeft"
+      :class="{ 'd-none': drawerLeft === undefined }"
+      class="d-lg-flex"
+    />
 
-    <TheRightDrawer v-model="drawerRight" />
+    <TheRightDrawer
+      v-model="drawerRight"
+      :class="{ 'd-none': drawerRight === undefined }"
+      class="d-lg-flex"
+    />
 
     <v-app-bar elevation="1" density="compact">
       <template #prepend>
@@ -43,8 +51,8 @@ import { useState } from '~/composables/useState.js';
 import { computed, ref, watch } from 'vue';
 
 const title = useState('title');
-const drawerLeft = ref(true);
-const drawerRight = ref(true);
+const drawerLeft = ref(undefined);
+const drawerRight = ref(undefined);
 const animate = ref(false);
 
 const classObj = computed(() => ({
