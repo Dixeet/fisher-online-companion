@@ -40,9 +40,20 @@ function read(fishTxtPath) {
       find[0] > 0 &&
       fishes.findIndex((f) => f.id === find[0]) === -1
     ) {
+      let name = '';
+      find[1]
+        .trim()
+        .split(' ')
+        .forEach((word, index) => {
+          if (index) {
+            name += ' ';
+          }
+          name += word[0].toUpperCase();
+          name += word.slice(1);
+        });
       fishes.push({
         id: find[0],
-        name: find[1].trim(),
+        name: name,
       });
     }
   }
