@@ -37,7 +37,6 @@ function read(mapsTxtPath) {
       let fish = {
         id: find[0],
         name: find[1].trim(),
-        availableFishes: [],
       };
       maps.push(fish);
     }
