@@ -1,6 +1,6 @@
 <template>
   <div
-    class="v-card v-theme--dark v-card--density-default v-card--variant-elevated mx-auto"
+    class="v-card v-card--density-default v-card--variant-elevated mx-auto"
     :style="{ 'max-width': `${width}px` }"
   >
     <div class="v-responsive v-img v-img--booting">
@@ -12,7 +12,9 @@
         onerror="this.style.filter = 'invert(0.8)';this.src='/images/fallback-fish.svg'"
         style=""
       />
-      <div class="v-responsive__content"></div>
+      <div class="v-responsive__content">
+        <slot name="image-content"></slot>
+      </div>
     </div>
     <div class="v-card-title text-align--center">{{ fish.name }}</div>
     <div class="v-card-text"><slot /></div>

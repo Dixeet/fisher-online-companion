@@ -33,10 +33,13 @@ function onReady(db) {
 
 function migrate(db) {
   db.version(1).stores({
-    weapons: '++id,name,type.id',
-    weaponTypes: '++id,name',
-    fishes: '++id,name',
-    maps: '++id,name',
+    weapons: 'id,name,type.id',
+    weaponTypes: 'id,name',
+    fishes: 'id,name',
+    maps: 'id,name',
+  });
+  db.version(2).stores({
+    mapFishes: 'id,mapId,fishId,mapName,fishName',
   });
   /*
   To refresh with new data,

@@ -6,7 +6,7 @@
         :key="index"
         class="v-col-12 v-col-sm-4 v-col-md-3 v-col-xl-2"
       >
-        <slot>
+        <slot :fish="fish">
           <FishCard width="250" :fish="fish" />
         </slot>
       </div>
