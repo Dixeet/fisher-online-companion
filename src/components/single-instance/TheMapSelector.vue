@@ -23,14 +23,13 @@
 import { useQueryDb } from '~/composables/useDb.js';
 import { computed, watchEffect } from 'vue';
 import { useStorage } from '@vueuse/core';
+import { useImageUrl } from '~/composables/useImageUrl.js';
 
 const map = useStorage('currentMap', {});
 const { state: maps } = useQueryDb((db) => db.maps.toArray(), []);
 
 const mapImageUrl = computed(() => {
-  return map.value.id
-    ? new URL(`/src/assets/images/maps/${map.value.id}.webp`, import.meta.url).href
-    : null;
+  return map.value.id ? useImageUrl(`maps/${map.value.id}.webp`) : null;
 });
 
 watchEffect(() => {
