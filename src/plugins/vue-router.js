@@ -4,6 +4,7 @@ import PageListRigs from '~/pages/Rigs/PageListRigs.vue';
 import PageDetailRigs from '~/pages/Rigs/PageDetailRigs.vue';
 import { useTitle } from '@vueuse/core';
 import { useState } from '~/composables/useState.js';
+import PageMapAddFishes from '~/pages/maps/[id]/PageMapAddFishes.vue';
 
 const mainTitle = 'Fisher Online Companion';
 const routes = [
@@ -20,6 +21,12 @@ const routes = [
       title: (to) => `Rigs Detail ${to.params.id}`,
       documentTitle: `Rig Detail - ${mainTitle}`,
     },
+  },
+  {
+    path: '/maps/:id/add-fishes',
+    component: PageMapAddFishes,
+    name: 'PageMapAddFishes',
+    meta: { documentTitle: `Add fishes to location - ${mainTitle}`, customKey: (to) => to.path },
   },
 ];
 
