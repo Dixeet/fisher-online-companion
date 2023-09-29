@@ -6,7 +6,7 @@
     color="primary"
     style="z-index: 2000"
   ></v-progress-linear>
-  <RouterView v-slot="{ Component }">
+  <RouterView :key="$route.meta?.routerKey" v-slot="{ Component }">
     <template v-if="Component">
       <Transition name="fade" mode="out-in">
         <Suspense @pending="active = true" @resolve="active = false">

@@ -47,6 +47,12 @@ router.afterEach((to, from) => {
   }
 });
 
+router.beforeEach((to) => {
+  if (to.meta?.customKey) {
+    to.meta.routerKey = to.meta.customKey(to);
+  }
+});
+
 function scrollBehavior(to, from, savedPosition) {
   return new Promise((resolve) => {
     setTimeout(() => {
