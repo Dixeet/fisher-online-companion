@@ -24,7 +24,7 @@
       </template>
 
       <v-app-bar-title :class="classObj" class="text-body-1 text-align--center d-none d-sm-block">
-        {{ title }}
+        <h1 class="text-body-1">{{ title }}</h1>
       </v-app-bar-title>
 
       <template #append>

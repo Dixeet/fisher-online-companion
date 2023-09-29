@@ -1,30 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import PageHome from '~/pages/PageHome.vue';
-import PageListRigs from '~/pages/Rigs/PageListRigs.vue';
-import PageDetailRigs from '~/pages/Rigs/PageDetailRigs.vue';
+import MainPage from '~/pages/MainPage.vue';
 import { useTitle } from '@vueuse/core';
 import { useState } from '~/composables/useState.js';
-import PageMapAddFishes from '~/pages/maps/[id]/PageMapAddFishes.vue';
+import MapAddFishesPage from '~/pages/maps/[id]/MapAddFishesPage.vue';
 
 const mainTitle = 'Fisher Online Companion';
 const routes = [
-  { path: '/', component: PageHome, meta: { title: mainTitle, documentTitle: mainTitle } },
-  {
-    path: '/rigs',
-    component: PageListRigs,
-    meta: { title: 'Rigs setup', documentTitle: `Rigs Setup - ${mainTitle}` },
-  },
-  {
-    path: '/rigs/:id',
-    component: PageDetailRigs,
-    meta: {
-      title: (to) => `Rigs Detail ${to.params.id}`,
-      documentTitle: `Rig Detail - ${mainTitle}`,
-    },
-  },
+  { path: '/', component: MainPage, meta: { title: mainTitle, documentTitle: mainTitle } },
   {
     path: '/maps/:id/add-fishes',
-    component: PageMapAddFishes,
+    component: MapAddFishesPage,
     name: 'PageMapAddFishes',
     meta: { documentTitle: `Add fishes to location - ${mainTitle}`, customKey: (to) => to.path },
   },

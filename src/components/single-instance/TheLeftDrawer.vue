@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer v-model="open">
     <v-list>
-      <v-list-item title="Rigs" to="/rigs"></v-list-item>
+      <v-list-item title="Main" to="/"></v-list-item>
       <v-list-item title="Fishes add" to="/maps/current/add-fishes"></v-list-item>
       <v-list-item title="Fishes 2" to="/maps/2/add-fishes"></v-list-item>
     </v-list>
