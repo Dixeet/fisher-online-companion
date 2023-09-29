@@ -62,11 +62,13 @@ function deleteDatabase() {
     deleteDbReq.onsuccess = () => {
       openDialog.value = false;
       loadingDelete.value = false;
+      // eslint-disable-next-line no-console
       console.log(`Database ${database?.name} deleted successfully`);
     };
     deleteDbReq.onerror = () => {
       openDialog.value = false;
       loadingDelete.value = false;
+      // eslint-disable-next-line no-console
       console.error(`Error deleting database ${database?.name}.`);
     };
   }

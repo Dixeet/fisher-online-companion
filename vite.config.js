@@ -6,8 +6,6 @@ import Icons from 'unplugin-icons/vite';
 import IconsResolver from 'unplugin-icons/resolver';
 import Components from 'unplugin-vue-components/vite';
 
-console.log(fileURLToPath(new URL('./src', import.meta.url)));
-
 // https://vitejs.dev/config/
 export default defineConfig({
   cacheDir: '.cache/',

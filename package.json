@@ -12,7 +12,7 @@
     "clean:parse": "rm -rf public/data/*",
     "clean:images": "rm -rf src/assets/images/maps/* src/assets/images/fishes/* src/assets/images/weapons/*",
     "parse": "node parsers/parse.js",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore\"",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "prettier": "prettier . --write --ignore-path ./package-lock.json"
   },
   "repository": {
@@ -40,7 +40,10 @@
       "eslint:recommended",
       "plugin:vue/vue3-recommended",
       "prettier"
-    ]
+    ],
+    "rules": {
+      "no-console": "error"
+    }
   },
   "prettier": {
     "semi": true,

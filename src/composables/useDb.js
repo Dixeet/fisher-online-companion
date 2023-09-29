@@ -23,6 +23,7 @@ export function useFetchDbData(dataToFetch, database = db) {
     promises.push(
       database[table].count((count) => {
         if (!count) {
+          // eslint-disable-next-line no-console
           console.log(`Fetching ${file}...`);
           return useFetch(`${import.meta.env.BASE_URL}data/${file}.json`).then(({ data }) => {
             return database[table].bulkAdd(JSON.parse(data.value));

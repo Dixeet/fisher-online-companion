@@ -69,6 +69,7 @@ if (!argv.help) {
     parseMaps(options);
   }
 } else {
+  // eslint-disable-next-line no-console
   console.log(output);
 }
 
