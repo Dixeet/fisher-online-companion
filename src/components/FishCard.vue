@@ -1,0 +1,42 @@
+<template>
+  <div
+    class="v-card v-theme--dark v-card--density-default v-card--variant-elevated mx-auto"
+    :style="{ 'max-width': `${width}px` }"
+  >
+    <div class="v-responsive v-img v-img--booting">
+      <div class="v-responsive__sizer" style="padding-bottom: 50%"></div>
+      <img
+        :alt="fish.name"
+        class="v-img__img v-img__img--contain"
+        :src="fishImgUrl"
+        onerror="this.style.filter = 'invert(0.8)';this.src='/images/fallback-fish.svg'"
+        style=""
+      />
+      <div class="v-responsive__content"></div>
+    </div>
+    <div class="v-card-title text-align--center">{{ fish.name }}</div>
+    <div class="v-card-text"><slot /></div>
+  </div>
+</template>
+
+<script setup>
+import { computed } from 'vue';
+import { useImageUrl } from '~/composables/useImageUrl.js';
+
+const props = defineProps({
+  fish: {
+    type: Object,
+    required: true,
+  },
+  width: {
+    type: String,
+    default: undefined,
+  },
+});
+
+const fishImgUrl = computed(() => {
+  return props.fish.id ? useImageUrl(`fishes/${props.fish.id}.webp`) : null;
+});
+</script>
+
+<style></style>
