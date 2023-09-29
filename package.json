@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "clean:vite": "rm -rf .cache/* components.d.ts",
     "clean:parse": "rm -rf public/data/*",
-    "clean:images": "rm -rf src/assets/images/maps/* src/assets/images/fishes/* src/assets/images/weapons/*",
+    "clean:images": "find src/assets/images/ ! -name '.gitkeep' -type f -exec rm -rf {} +",
     "parse": "node parsers/parse.js",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "prettier": "prettier . --write --ignore-path ./package-lock.json"

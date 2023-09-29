@@ -13,6 +13,11 @@ export default function generateImages(weapons, fishes, maps, outputDir, sourceD
 function generate(array, outputDir, sourceDir, dir, dirPrefix) {
   for (const el of array) {
     const commandArgs = [
+      '-q',
+      '70',
+      '-resize',
+      '384',
+      '0',
       getPath(sourceDir, dir, `${el.id}.png`),
       '-o',
       getPath(outputDir, dirPrefix, `${el.id}.webp`),
