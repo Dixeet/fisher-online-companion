@@ -6,37 +6,26 @@
       class="d-lg-flex"
     />
 
-    <TheRightDrawer
-      v-model="drawerRight"
-      :class="{ 'd-none': drawerRight === undefined }"
-      class="d-lg-flex"
-    />
-
     <v-app-bar elevation="1" density="compact">
       <template #prepend>
-        <v-app-bar-nav-icon
-          class="d-lg-none"
-          density="comfortable"
-          variant="text"
-          @click.stop="drawerLeft = !drawerLeft"
-        ></v-app-bar-nav-icon>
-        <ButtonBack />
+        <v-btn size="large" :active="false" density="compact" :icon="IconFishing" to="/" />
       </template>
 
-      <v-app-bar-title :class="classObj" class="text-body-1 text-align--center d-none d-sm-block">
+      <v-app-bar-title :class="classObj" class="text-body-1 text-align--center">
         <h1 class="text-body-1">{{ title }}</h1>
       </v-app-bar-title>
 
       <template #append>
-        <v-btn
-          class="d-lg-none"
-          density="comfortable"
-          variant="text"
-          :icon="IconToolbox"
-          @click.stop="drawerRight = !drawerRight"
-        />
+        <ButtonBack />
       </template>
     </v-app-bar>
+
+    <v-btn
+      class="d-lg-none drawer__open"
+      variant="tonal"
+      :icon="IconToolbox"
+      @click.stop="drawerLeft = !drawerLeft"
+    />
 
     <v-main>
       <v-container :class="classObj">
@@ -47,12 +36,12 @@
 </template>
 <script setup>
 import IconToolbox from '~icons/game-icons/toolbox';
+import IconFishing from '~icons/game-icons/boat-fishing';
 import { useState } from '~/composables/useState.js';
 import { computed, ref, watch } from 'vue';
 
 const title = useState('title');
 const drawerLeft = ref(undefined);
-const drawerRight = ref(undefined);
 const animate = ref(false);
 
 const classObj = computed(() => ({
@@ -65,3 +54,20 @@ watch(title, () => {
   setTimeout(() => (animate.value = false));
 });
 </script>
+<style lang="scss">
+.v-toolbar__content {
+  > .v-toolbar-title {
+    margin-inline-end: 16px;
+    h1 {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+.drawer__open {
+  position: fixed;
+  left: 8px;
+  bottom: 8px;
+  z-index: 9;
+}
+</style>

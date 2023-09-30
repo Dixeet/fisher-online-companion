@@ -25,3 +25,14 @@ a {
     display: none;
   }
 }
+
+@media (hover: none) {
+  .a-fish-card {
+    &:hover &__icon--hover {
+      display: inherit;
+    }
+    &__icon--hover {
+      display: inherit;
+    }
+  }
+}

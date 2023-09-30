@@ -1,6 +1,6 @@
 <template>
   <div
-    class="v-card v-card--density-default v-card--variant-elevated mx-auto a-fish-card"
+    class="v-card v-theme--dark v-card--density-default v-card--variant-elevated mx-auto a-fish-card"
     :style="{ 'max-width': `${width}px` }"
   >
     <div class="v-responsive v-img v-img--booting">
@@ -10,6 +10,7 @@
         class="v-img__img v-img__img--contain"
         :src="fishImgUrl"
         onerror="this.style.filter = 'invert(0.8)';this.src='/images/fallback-fish.svg'"
+        onload="if(!this.src.includes('/images/fallback-fish.svg')) {this.style.filter = 'invert(0)'}"
         style=""
       />
       <div class="v-responsive__content">
@@ -22,6 +23,8 @@
 </template>
 
 <script setup>
+// eslint-disable-next-line no-unused-vars
+import { VCard } from 'vuetify/components';
 import { computed } from 'vue';
 import { useImageUrl } from '~/composables/useImageUrl.js';
 

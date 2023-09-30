@@ -1,10 +1,6 @@
 <template>
-  <v-navigation-drawer v-model="open">
-    <v-list>
-      <v-list-item title="Main" to="/"></v-list-item>
-      <v-list-item title="Fishes add" to="/maps/current/add-fishes"></v-list-item>
-      <v-list-item title="Fishes 2" to="/maps/2/add-fishes"></v-list-item>
-    </v-list>
+  <v-navigation-drawer v-model="open" width="285">
+    <TheMapSelector> </TheMapSelector>
     <template #append>
       <TheDatabaseManager />
     </template>
@@ -24,4 +20,8 @@ const emit = defineEmits(['update:modelValue']);
 const open = useVModel(props, 'modelValue', emit);
 </script>
 
-<style></style>
+<style>
+.v-layout .v-navigation-drawer__scrim {
+  position: fixed;
+}
+</style>

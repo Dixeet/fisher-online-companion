@@ -1,6 +1,8 @@
 <template>
   <div class="a-map-selector">
-    <v-img height="142" :src="mapImageUrl"> </v-img>
+    <router-link to="/">
+      <v-img height="142" :src="mapImageUrl"> </v-img>
+    </router-link>
     <v-select
       v-model="map"
       :eager="true"

@@ -1,10 +1,17 @@
 <template>
   <div>
-    <v-text-field v-model="search" variant="outlined" label="Search" clearable>
-      <template #details>
-        <div class="mb-2">{{ count }}&nbsp;fishes</div>
-      </template>
-    </v-text-field>
+    <div class="a-search__input">
+      <v-text-field
+        v-model="search"
+        density="compact"
+        placeholder="Search"
+        variant="outlined"
+        :label="`${count} fishes`"
+        persistent-placeholder
+        clearable
+      >
+      </v-text-field>
+    </div>
     <FishListCard :fishes="fishes">
       <template #default="{ fish }">
         <FishCard width="250" :fish="fish">
@@ -34,7 +41,12 @@
       </template>
     </FishListCard>
     <div v-show="fishes.length" class="text-center mx-auto a-list__paginator mt-2">
-      <v-pagination v-model="page" active-color="primary" :length="numberOfPages"></v-pagination>
+      <v-pagination
+        v-model="page"
+        active-color="primary"
+        :length="numberOfPages"
+        @update:model-value="scrollToTop"
+      ></v-pagination>
     </div>
   </div>
 </template>
@@ -77,10 +89,25 @@ if (route.name === 'PageMapAddFishes') {
 watchEffect(() => {
   title.value = map.value?.name ? `Add fishes to ${map.value.name}` : 'Choose a location';
 });
+
+function scrollToTop() {
+  window.scroll({
+    top: 0,
+    behavior: 'smooth',
+  });
+}
 </script>
 
 <style lang="scss">
 .a-list__paginator {
   max-width: 500px;
+}
+.a-search__input {
+  margin-top: -16px;
+  padding-top: 16px;
+  position: sticky;
+  top: 48px;
+  background-color: rgb(var(--v-theme-background));
+  z-index: 5;
 }
 </style>
