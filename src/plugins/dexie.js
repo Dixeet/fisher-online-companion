@@ -1,4 +1,4 @@
-import { initDb, useFetchDbData } from '~/composables/useDb.js';
+import { initDb, useDeleteDbData, useFetchDbData } from '~/composables/useDb.js';
 import { useState } from '~/composables/useState.js';
 import Dexie from 'dexie';
 
@@ -41,16 +41,19 @@ function migrate(db) {
   db.version(2).stores({
     mapFishes: 'id,mapId,fishId,mapName,fishName',
   });
+  db.version(3)
+    .stores({
+      weapons: 'id,name,type.id,mainType,subtype',
+    })
+    .upgrade(() => {
+      return useDeleteDbData(dataToFetch);
+    });
   /*
   To refresh with new data,
   use code below and increment VERSION_NUMBER according to the previous one
 
-  db.version(VERSION_NUMBER).upgrade((tx) => {
-    const promises = [];
-    dataToFetch.forEach(({ table }) => {
-      promises.push(tx.table(table).toCollection().delete());
-    });
-    return Promise.all(promises);
+  db.version(VERSION_NUMBER).upgrade(() => {
+   return useDeleteDbData(dataToFetch);
   });
 
 */

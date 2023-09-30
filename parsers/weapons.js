@@ -1,6 +1,7 @@
 import { writeFile } from 'node:fs/promises';
 import lineByLine from 'n-readlines';
 import parseXml from './weaponsXML.js';
+import { mainTypes } from './additionnalInfos.js';
 
 const DEFAULT_OPTIONS = {
   from: {
@@ -47,9 +48,12 @@ async function read(weaponsTxtPath, weaponsXmlPath) {
     const str = line.toString();
     currentWeapon = findCurrentWeapon(str, currentWeapon, weapons);
     currentWeapon = findCurrentType(str, currentWeapon, weaponTypes);
+    currentWeapon = findCurrentSubtype(str, currentWeapon, weaponTypes);
     currentWeapon = findCurrentPar(str, currentWeapon);
     if (endOfWeapon(str) && currentWeapon) {
-      weaps.push(currentWeapon);
+      if (currentWeapon.type) {
+        weaps.push(currentWeapon);
+      }
       currentWeapon = null;
     }
   }
@@ -75,7 +79,37 @@ function findCurrentType(str, weapon, weaponTypes) {
     if (typeIdFound) {
       const type = weaponTypes.find((type) => type.id === typeIdFound[0]);
       if (type) {
-        weapon.type = type;
+        const mainTypeFind = mainTypes.find((main) => main.id === type.id);
+        weapon.type = {
+          id: type.id,
+          name: type.name,
+        };
+        if (mainTypeFind) {
+          weapon.mainType = mainTypeFind.mainType;
+        }
+      }
+    }
+  }
+  return weapon;
+}
+
+function findCurrentSubtype(str, weapon, weaponTypes) {
+  if (weapon) {
+    const subtypeIdFound = str.match(/(?<=subtype=)(.+)/g);
+    if (subtypeIdFound) {
+      weapon.subtype = subtypeIdFound[0];
+      if (subtypeIdFound[0] !== '0' && weapon.type) {
+        const typeIndex = weaponTypes.findIndex((type) => type.id === weapon.type.id);
+        if (typeIndex > -1) {
+          if (!Array.isArray(weaponTypes[typeIndex].subtypes)) {
+            weaponTypes[typeIndex].subtypes = [];
+          }
+          if (!weaponTypes[typeIndex].subtypes.find((sub) => sub.id === subtypeIdFound[0])) {
+            weaponTypes[typeIndex].subtypes.push({
+              id: subtypeIdFound[0],
+            });
+          }
+        }
       }
     }
   }

@@ -1,5 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import xml2js from 'xml2js';
+import { excluded } from './additionnalInfos.js';
 
 export default async function parseXml(path) {
   const xml = await readFile(path);
@@ -15,10 +16,11 @@ export default async function parseXml(path) {
   for (const {
     $: { id, name },
   } of types) {
-    weaponTypes.push({
-      id,
-      name,
-    });
+    if (!excluded.some((exclude) => exclude.id === id))
+      weaponTypes.push({
+        id,
+        name,
+      });
   }
 
   const weapons = [];
