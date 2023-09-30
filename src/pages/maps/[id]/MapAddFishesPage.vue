@@ -7,7 +7,7 @@
     </v-text-field>
     <FishListCard :fishes="fishes">
       <template #default="{ fish }">
-        <FishCard class="a-fish-card" width="250" :fish="fish">
+        <FishCard width="250" :fish="fish">
           <template #image-content>
             <v-btn
               v-if="fishInMap(fish)"
@@ -21,7 +21,7 @@
             />
             <v-btn
               v-else
-              class="ma-1 a-fish-card__add-icon"
+              class="ma-1 a-fish-card__icon--hover"
               size="large"
               color="success"
               density="compact"
@@ -54,7 +54,7 @@ const page = ref(1);
 const search = ref('');
 const map = shallowRef({});
 
-const { fishInMap, fetchFishesInMap, removeFishFromMap, addFishInMap } = useFishesInMap(map);
+const { fishInMap, removeFishFromMap, addFishInMap } = useFishesInMap(map);
 const db = useDb();
 const title = useState('title');
 const route = useRoute();
@@ -76,20 +76,11 @@ if (route.name === 'PageMapAddFishes') {
 
 watchEffect(() => {
   title.value = map.value?.name ? `Add fishes to ${map.value.name}` : 'Choose a location';
-  fetchFishesInMap();
 });
 </script>
 
 <style lang="scss">
 .a-list__paginator {
   max-width: 500px;
-}
-.a-fish-card {
-  &:hover &__add-icon {
-    display: block;
-  }
-  &__add-icon {
-    display: none;
-  }
 }
 </style>

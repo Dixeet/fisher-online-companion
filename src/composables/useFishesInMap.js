@@ -1,9 +1,8 @@
-import { isRef, shallowRef } from 'vue';
+import { isRef, shallowRef, watchEffect } from 'vue';
 import { useDb } from '~/composables/useDb.js';
 
-const db = useDb();
-
 export function useFishesInMap(mapRef, fishesInMapRef = null) {
+  const db = useDb();
   const fishesInMap = isRef(fishesInMapRef) ? fishesInMapRef : shallowRef([]);
 
   const fetchFishesInMap = function () {
@@ -12,7 +11,12 @@ export function useFishesInMap(mapRef, fishesInMapRef = null) {
         .where('mapId')
         .equals(mapRef.value.id)
         .toArray()
-        .then((data) => (fishesInMap.value = data));
+        .then((data) => {
+          return (fishesInMap.value = data.map((d) => ({
+            id: d.fishId,
+            name: d.fishName,
+          })));
+        });
     }
   };
 
@@ -34,9 +38,15 @@ export function useFishesInMap(mapRef, fishesInMapRef = null) {
 
   const fishInMap = function (fish) {
     return fishesInMap.value.some((f) => {
-      return f.fishId === fish.id;
+      return f.id === fish.id;
     });
   };
+
+  watchEffect(() => {
+    if (mapRef.value?.id) {
+      fetchFishesInMap();
+    }
+  });
 
   return {
     fishesInMap,

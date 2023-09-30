@@ -16,3 +16,12 @@ a {
 .fade-leave-to {
   opacity: 0;
 }
+
+.a-fish-card {
+  &:hover &__icon--hover {
+    display: block;
+  }
+  &__icon--hover {
+    display: none;
+  }
+}

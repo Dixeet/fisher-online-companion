@@ -1,6 +1,6 @@
 <template>
   <div
-    class="v-card v-card--density-default v-card--variant-elevated mx-auto"
+    class="v-card v-card--density-default v-card--variant-elevated mx-auto a-fish-card"
     :style="{ 'max-width': `${width}px` }"
   >
     <div class="v-responsive v-img v-img--booting">
