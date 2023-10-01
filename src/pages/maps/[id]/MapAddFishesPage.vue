@@ -74,7 +74,15 @@ const {
   data: fishes,
   numberOfPages,
   count,
-} = useFetchTableRecords('fishes', search, page, { limit: 24 });
+} = useFetchTableRecords(
+  (db, filter) =>
+    db.fishes.orderBy('name').filter((fish) => new RegExp(filter.value ?? '', 'i').test(fish.name)),
+  search,
+  page,
+  {
+    limit: 24,
+  },
+);
 
 if (route.name === 'PageMapAddFishes') {
   if (route.params.id === 'current') {

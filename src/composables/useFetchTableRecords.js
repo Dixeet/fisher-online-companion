@@ -1,86 +1,51 @@
 import { useDb } from '~/composables/useDb.js';
-import { computed, isRef, ref, shallowRef, watch } from 'vue';
+import { computed, isRef, ref, shallowRef, toRef, watchEffect } from 'vue';
 import { refDebounced } from '@vueuse/core';
 
 const defaultOptions = {
   limit: 18,
   debounce: 500,
+  shallow: true,
 };
 
-export function useFetchTableRecords(table, filter = null, page = null, options = defaultOptions) {
+export function useFetchTableRecords(
+  request,
+  search = null,
+  page = null,
+  options = defaultOptions,
+) {
   options = { ...defaultOptions, ...options };
-  let filterRegexName = null;
 
-  if (filter && isRef(filter)) {
-    const filterDebounced = refDebounced(filter, options.debounce);
-    filterRegexName = computed(() =>
-      filterDebounced.value ? new RegExp(filterDebounced.value, 'i') : null,
-    );
-  }
+  const pageNumber = page ? toRef(page) : page;
+  const filter =
+    isRef(search) && options.debounce ? refDebounced(search, options.debounce) : undefined;
 
-  const data = shallowRef([]);
+  const data = options.shallow ? shallowRef([]) : ref([]);
   const count = ref(null);
-  const numberOfPages = computed(() => {
-    if (count.value?.valueOf && options.limit) {
-      return Math.ceil(count.value / options.limit);
-    }
-    return 0;
-  });
+  const numberOfPages = options.limit
+    ? computed(() => Math.ceil(count.value / options.limit))
+    : null;
+
   const db = useDb();
+  let oldFilterValue = filter?.value ?? filter;
 
-  if (page && isRef(page)) {
-    watch(
-      page,
-      () => {
-        fetch(db, table, data, filterRegexName, page, options.limit);
-      },
-      { immediate: true },
-    );
+  watchEffect(query);
+
+  function query() {
+    let reqData = request(db, filter);
+    if ((isRef(filter) && filter?.value !== oldFilterValue) || count?.value === null) {
+      oldFilterValue = filter?.value;
+      request(db, filter).count((res) => (count.value = res));
+      if (isRef(pageNumber)) {
+        pageNumber.value = 1;
+      }
+    }
+    if (pageNumber?.value) {
+      const offset = (pageNumber.value - 1) * options.limit;
+      reqData = reqData.offset(offset).limit(options.limit);
+    }
+    reqData.toArray((res) => (data.value = res));
   }
 
-  if (filterRegexName && isRef(filterRegexName)) {
-    watch(
-      filterRegexName,
-      () => {
-        if (page) {
-          page.value = 1;
-        }
-        fetch(db, table, data, filterRegexName, page, options.limit);
-        countFetch(db, table, count, filterRegexName);
-      },
-      { immediate: true },
-    );
-  }
-
-  if (!page && !filterRegexName) {
-    fetch(db, table, data);
-  }
-
-  countFetch(db, table, count, filterRegexName);
-
-  return { data, count, numberOfPages };
-}
-
-function fetch(db, table, data, filterRegexName, page, limit) {
-  let req = db[table].orderBy('name');
-  if (filterRegexName?.value) {
-    req = req.filter((fish) => filterRegexName.value.test(fish.name));
-  }
-  if (page?.value) {
-    const offset = (page.value - 1) * limit;
-    req = req.offset(offset).limit(limit);
-  }
-  req.toArray().then((f) => {
-    data.value = f;
-  });
-}
-
-function countFetch(db, table, count, filterRegexName) {
-  let req = db[table].orderBy('name');
-  if (filterRegexName?.value) {
-    req = req.filter((fish) => filterRegexName.value.test(fish.name));
-    req.count().then((c) => (count.value = c));
-  } else {
-    req.count().then((c) => (count.value = c));
-  }
+  return { data, count, numberOfPages, page: pageNumber, query };
 }
