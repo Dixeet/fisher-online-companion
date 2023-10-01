@@ -48,8 +48,10 @@ async function read(weaponsTxtPath, weaponsXmlPath) {
     const str = line.toString();
     currentWeapon = findCurrentWeapon(str, currentWeapon, weapons);
     currentWeapon = findCurrentType(str, currentWeapon, weaponTypes);
+    currentWeapon = findCurrentImage(str, currentWeapon);
     currentWeapon = findCurrentSubtype(str, currentWeapon, weaponTypes);
     currentWeapon = findCurrentPar(str, currentWeapon);
+    currentWeapon = findCurrentWeightLimit(str, currentWeapon);
     if (endOfWeapon(str) && currentWeapon) {
       if (currentWeapon.type) {
         weaps.push(currentWeapon);
@@ -93,6 +95,16 @@ function findCurrentType(str, weapon, weaponTypes) {
   return weapon;
 }
 
+function findCurrentImage(str, weapon) {
+  if (weapon) {
+    const imageIdFound = str.match(/(?<=imageid=)(.+)/g);
+    if (imageIdFound) {
+      weapon.imgId = imageIdFound[0];
+    }
+  }
+  return weapon;
+}
+
 function findCurrentSubtype(str, weapon, weaponTypes) {
   if (weapon) {
     const subtypeIdFound = str.match(/(?<=subtype=)(.+)/g);
@@ -121,6 +133,18 @@ function findCurrentPar(str, weapon) {
     const parFound = str.match(/(?<=<basePar>)(.*)(?=<\/basePar>)/g);
     if (parFound) {
       weapon.par = parFound[0].split('/');
+    }
+  }
+  return weapon;
+}
+
+function findCurrentWeightLimit(str, weapon) {
+  if (weapon) {
+    const weightsFound = str.match(
+      /(?<=<minWgtBait>|<maxWgtBait>)(\d*)(?=<\/minWgtBait>|<\/maxWgtBait>)/g,
+    );
+    if (weightsFound && weapon.par) {
+      weapon.par[weapon.par.length - 1] = weightsFound;
     }
   }
   return weapon;
