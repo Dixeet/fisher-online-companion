@@ -31,6 +31,14 @@
       <v-container :class="classObj">
         <slot />
       </v-container>
+      <v-snackbar v-model="snackbar" :color="snackbarColor" location="top right">
+        {{ snackbarText }}
+        <template #actions>
+          <v-btn icon @click="snackbar = false">
+            <v-icon> <i-mdi-close></i-mdi-close> </v-icon>
+          </v-btn>
+        </template>
+      </v-snackbar>
     </v-main>
   </v-layout>
 </template>
@@ -39,10 +47,12 @@ import IconToolbox from '~icons/game-icons/toolbox';
 import IconFishing from '~icons/game-icons/boat-fishing';
 import { useState } from '~/composables/useState.js';
 import { computed, ref, watch } from 'vue';
+import { getNotifyRefs } from '~/composables/useNotify.js';
 
 const title = useState('title');
 const drawerLeft = ref(undefined);
 const animate = ref(false);
+const { snackbar, snackbarText, snackbarColor } = getNotifyRefs();
 
 const classObj = computed(() => ({
   'fade-enter-from': animate.value,
