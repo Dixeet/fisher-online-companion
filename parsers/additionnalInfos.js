@@ -90,7 +90,7 @@ export const mainTypes = [
   ...feeders.map((el) => ({ ...el, mainType: 'feeder' })),
   ...reels.map((el) => ({ ...el, mainType: 'reel' })),
   ...rods.map((el) => ({ ...el, mainType: 'rod' })),
-  ...attractantTypes.map((el) => ({ ...el, mainType: 'attractantType' })),
+  ...attractantTypes.map((el) => ({ ...el, mainType: 'attractant' })),
   ...attractantPrepared.map((el) => ({ ...el, mainType: 'attractantPrepared' })),
   ...attractantIngredients.map((el) => ({ ...el, mainType: 'attractantIngredient' })),
 ];
