@@ -139,7 +139,7 @@ function findCurrentPar(str, weapon) {
 }
 
 function findCurrentWeightLimit(str, weapon) {
-  if (weapon) {
+  if (weapon && weapon.mainType === 'rod') {
     const weightsFound = str.match(
       /(?<=<minWgtBait>|<maxWgtBait>)(\d*)(?=<\/minWgtBait>|<\/maxWgtBait>)/g,
     );

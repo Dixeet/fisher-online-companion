@@ -3,15 +3,34 @@ import MainPage from '~/pages/MainPage.vue';
 import { useTitle } from '@vueuse/core';
 import { useState } from '~/composables/useState.js';
 import MapAddFishesPage from '~/pages/maps/[id]/MapAddFishesPage.vue';
+import TacklesPage from '~/pages/tackles/TacklesPage.vue';
+import TackleId from '~/pages/tackles/[id]/TackleId.vue';
 
 const mainTitle = 'Fisher Online Companion';
 const routes = [
-  { path: '/', component: MainPage, meta: { title: mainTitle, documentTitle: mainTitle } },
+  {
+    path: '/',
+    name: 'MainPage',
+    component: MainPage,
+    meta: { title: mainTitle, documentTitle: mainTitle },
+  },
   {
     path: '/maps/:id/add-fishes',
     component: MapAddFishesPage,
     name: 'PageMapAddFishes',
     meta: { documentTitle: `Add fishes to location - ${mainTitle}`, customKey: (to) => to.path },
+  },
+  {
+    path: '/tackles',
+    component: TacklesPage,
+    name: 'TacklesPage',
+    meta: { documentTitle: `Manage tackles - ${mainTitle}`, title: 'Manage tackles' },
+  },
+  {
+    path: '/tackles/:id',
+    component: TackleId,
+    name: 'TackleId',
+    meta: { documentTitle: `Edit tackle - ${mainTitle}`, customKey: (to) => to.path },
   },
 ];
 
