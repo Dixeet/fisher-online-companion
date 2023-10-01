@@ -106,16 +106,4 @@ function scrollToTop() {
 }
 </script>
 
-<style lang="scss">
-.a-list__paginator {
-  max-width: 500px;
-}
-.a-search__input {
-  margin-top: -16px;
-  padding-top: 16px;
-  position: sticky;
-  top: 48px;
-  background-color: rgb(var(--v-theme-background));
-  z-index: 5;
-}
-</style>
+<style lang="scss"></style>

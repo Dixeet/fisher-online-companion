@@ -38,9 +38,11 @@ function migrate(db) {
     fishes: 'id,name',
     maps: 'id,name',
   });
+
   db.version(2).stores({
     mapFishes: 'id,mapId,fishId,mapName,fishName',
   });
+
   db.version(3)
     .stores({
       weapons: 'id,name,type.id,mainType,subtype',
@@ -48,6 +50,11 @@ function migrate(db) {
     .upgrade(() => {
       return useDeleteDbData(dataToFetch);
     });
+
+  db.version(4).stores({
+    tackles: '++id,name,rod.id,rod.type.id,rod.subtype',
+  });
+
   /*
   To refresh with new data,
   use code below and increment VERSION_NUMBER according to the previous one
