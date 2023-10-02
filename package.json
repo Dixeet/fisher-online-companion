@@ -61,9 +61,7 @@
     "prettier": "^3.0.3",
     "unplugin-icons": "^0.17.0",
     "unplugin-vue-components": "^0.25.2",
-    "vite": "^4.4.8",
-    "vite-plugin-inspect": "0.7.38",
-    "vite-plugin-vue-devtools": "^1.0.0-rc.5"
+    "vite": "^4.4.8"
   },
   "dependencies": {
     "@vueuse/core": "^10.4.1",

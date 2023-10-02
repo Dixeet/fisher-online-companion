@@ -5,7 +5,6 @@ import vuetify from 'vite-plugin-vuetify';
 import Icons from 'unplugin-icons/vite';
 import IconsResolver from 'unplugin-icons/resolver';
 import Components from 'unplugin-vue-components/vite';
-import VueDevTools from 'vite-plugin-vue-devtools';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -27,7 +26,6 @@ export default defineConfig({
         }),
       ],
     }),
-    VueDevTools(),
   ],
   resolve: {
     alias: {
