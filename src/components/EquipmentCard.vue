@@ -1,11 +1,16 @@
 <template>
-  <div class="v-card v-card--variant-elevated a-fish-card" :style="{ 'max-width': `${width}px` }">
+  <div
+    class="v-card v-card--variant-elevated a-equipment-card"
+    :style="{ 'max-width': `${width}px` }"
+  >
     <div class="d-flex align-center">
       <div class="ml-3 my-2">
         <img class="d-block" height="48" :src="imgUrl" onerror="this.removeAttribute('src')" />
       </div>
       <div class="v-col">
-        <div class="text-align--center text-body-1">{{ equipment.name }}</div>
+        <div class="text-align--center text-body-1">
+          {{ equipment.name }}
+        </div>
         <div
           class="text-body-3 font-weight-thin text-disabled d-flex flex-wrap justify-space-between"
         >
@@ -19,6 +24,17 @@
         </div>
       </div>
     </div>
+    <v-btn
+      v-if="clearable && equipment.id"
+      class="a-equipment-card__delete-button"
+      variant="text"
+      density="compact"
+      size="small"
+      icon
+      @click.stop="clear"
+    >
+      <v-icon size="small-xs"><i-mdi-close></i-mdi-close></v-icon>
+    </v-btn>
   </div>
 </template>
 
@@ -38,7 +54,13 @@ const props = defineProps({
     type: String,
     default: undefined,
   },
+  clearable: {
+    type: Boolean,
+    default: false,
+  },
 });
+
+const emit = defineEmits(['clear']);
 
 const pars = useEquipmentInfos();
 
@@ -46,6 +68,19 @@ const imgUrl = computed(() => {
   const id = props.equipment.imgId ?? props.equipment.id;
   return id ? useImageUrl(`weapons/${id}.webp`) : null;
 });
+
+function clear() {
+  emit('clear', props.equipment);
+}
 </script>
 
-<style></style>
+<style lang="scss">
+.a-equipment-card {
+  position: relative;
+  &__delete-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+}
+</style>

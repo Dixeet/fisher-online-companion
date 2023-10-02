@@ -9,6 +9,8 @@
         <EquipmentCard
           class="a-cursor--pointer"
           :equipment="tackle.rod"
+          clearable
+          @clear="onClear"
           @click.stop="chooseType('rod')"
         >
         </EquipmentCard>
@@ -18,6 +20,8 @@
         <EquipmentCard
           class="a-cursor--pointer"
           :equipment="tackle.reel"
+          clearable
+          @clear="onClear"
           @click.stop="chooseType('reel')"
         >
         </EquipmentCard>
@@ -27,6 +31,8 @@
         <EquipmentCard
           class="a-cursor--pointer"
           :equipment="tackle.line"
+          clearable
+          @clear="onClear"
           @click.stop="chooseType('line')"
         >
         </EquipmentCard>
@@ -36,6 +42,8 @@
         <EquipmentCard
           class="a-cursor--pointer"
           :equipment="tackle.float"
+          clearable
+          @clear="onClear"
           @click.stop="chooseType('float')"
         >
         </EquipmentCard>
@@ -45,6 +53,8 @@
         <EquipmentCard
           class="a-cursor--pointer"
           :equipment="tackle.leader"
+          clearable
+          @clear="onClear"
           @click.stop="chooseType('leader')"
         >
         </EquipmentCard>
@@ -54,6 +64,8 @@
         <EquipmentCard
           class="a-cursor--pointer"
           :equipment="tackle.hook"
+          clearable
+          @clear="onClear"
           @click.stop="chooseType('hook')"
         >
         </EquipmentCard>
@@ -63,6 +75,8 @@
         <EquipmentCard
           class="a-cursor--pointer"
           :equipment="tackle.lure"
+          clearable
+          @clear="onClear"
           @click.stop="chooseType('lure')"
         >
         </EquipmentCard>
@@ -72,6 +86,8 @@
         <EquipmentCard
           class="a-cursor--pointer"
           :equipment="tackle.bait"
+          clearable
+          @clear="onClear"
           @click.stop="chooseType('bait')"
         >
         </EquipmentCard>
@@ -81,6 +97,8 @@
         <EquipmentCard
           class="a-cursor--pointer"
           :equipment="tackle.feeder"
+          clearable
+          @clear="onClear"
           @click.stop="chooseType('feeder')"
         >
         </EquipmentCard>
@@ -91,6 +109,8 @@
         <EquipmentCard
           class="a-cursor--pointer"
           :equipment="tackle.attractant"
+          clearable
+          @clear="onClear"
           @click.stop="chooseType('attractant')"
         >
         </EquipmentCard>
@@ -112,17 +132,18 @@ import { ref, toValue, toRaw } from 'vue';
 import { useDb } from '~/composables/useDb.js';
 import { useRoute, useRouter } from 'vue-router';
 import { useNotify } from '~/composables/useNotify.js';
+import { useNewTackle } from '~/composables/useEquipmentInfos.js';
 
 const equimentType = ref('rod');
 const equimentsOpen = ref(false);
-const tackle = ref(getNewTackle());
+const tackle = ref(useNewTackle());
 
 const db = useDb();
 const router = useRouter();
 const route = useRoute();
 
 if (route.params.id === 'new') {
-  tackle.value = getNewTackle();
+  tackle.value = useNewTackle();
 } else {
   db.tackles.get(parseInt(route.params.id)).then((data) => {
     if (data) {
@@ -133,50 +154,28 @@ if (route.params.id === 'new') {
   });
 }
 
-function getNewTackle() {
-  return {
-    name: '',
-    rod: {
-      name: 'Choose a rod',
-    },
-    reel: {
-      name: 'Choose a reel',
-    },
-    line: {
-      name: 'Choose a line',
-    },
-    leader: {
-      name: 'Choose a leader',
-    },
-    hook: {
-      name: 'Choose a hook',
-    },
-    lure: {
-      name: 'Choose a lure',
-    },
-    bait: {
-      name: 'Choose a bait',
-    },
-    float: {
-      name: 'Choose a float',
-    },
-    feeder: {
-      name: 'Choose a feeder',
-    },
-    attractant: {
-      name: 'Choose a attractant',
-    },
-  };
-}
-
 function onChoose(equipment) {
   tackle.value[equipment.mainType] = equipment;
+  if (equipment.mainType === 'hook') {
+    const newTackle = useNewTackle();
+    tackle.value.lure = { ...newTackle.lure };
+  }
+  if (equipment.mainType === 'lure') {
+    const newTackle = useNewTackle();
+    tackle.value.hook = { ...newTackle.hook };
+    tackle.value.bait = { ...newTackle.bait };
+  }
   close();
 }
 
 function chooseType(type) {
   equimentType.value = type;
   open();
+}
+
+function onClear(equipment) {
+  const newTackle = useNewTackle();
+  tackle.value[equipment.mainType] = { ...newTackle[equipment.mainType] };
 }
 
 function open() {
