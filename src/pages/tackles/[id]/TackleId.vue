@@ -11,15 +11,6 @@
           :equipment="tackle.rod"
           @click.stop="chooseType('rod')"
         >
-          <template #default="{ equipment }">
-            <div
-              v-for="(par, index) in pars.rod"
-              :key="`par-${index}`"
-              class="a-equipment__infos mr-1"
-            >
-              {{ par(equipment.par, index) }}
-            </div>
-          </template>
         </EquipmentCard>
       </div>
       <div v-if="tackle.rod.id" class="mb-5">
@@ -29,15 +20,6 @@
           :equipment="tackle.reel"
           @click.stop="chooseType('reel')"
         >
-          <template #default="{ equipment }">
-            <div
-              v-for="(par, index) in pars.reel"
-              :key="`par-${index}`"
-              class="a-equipment__infos mr-1"
-            >
-              {{ par(equipment.par, index) }}
-            </div>
-          </template>
         </EquipmentCard>
       </div>
       <div v-if="tackle.rod.id" class="mb-5">
@@ -47,15 +29,6 @@
           :equipment="tackle.line"
           @click.stop="chooseType('line')"
         >
-          <template #default="{ equipment }">
-            <div
-              v-for="(par, index) in pars.line"
-              :key="`par-${index}`"
-              class="a-equipment__infos mr-1"
-            >
-              {{ par(equipment.par, index) }}
-            </div>
-          </template>
         </EquipmentCard>
       </div>
       <div v-if="tackle.rod.id && tackle.rod.type?.name === 'Float rod'" class="mb-5">
@@ -74,15 +47,6 @@
           :equipment="tackle.leader"
           @click.stop="chooseType('leader')"
         >
-          <template #default="{ equipment }">
-            <div
-              v-for="(par, index) in pars.leader"
-              :key="`par-${index}`"
-              class="a-equipment__infos mr-1"
-            >
-              {{ par(equipment.par, index) }}
-            </div>
-          </template>
         </EquipmentCard>
       </div>
       <div v-if="tackle.rod.id" class="mb-5">
@@ -135,34 +99,16 @@
       <v-btn class="mt-5" color="primary" type="submit" block>Save</v-btn>
     </form>
 
-    <v-dialog v-model="equimentsOpen" class="bg-background" fullscreen>
-      <div class="bg-background">
-        <v-btn size="small" class="ma-2" icon dark @click="close()">
-          <v-icon>
-            <i-mdi-close></i-mdi-close>
-          </v-icon>
-        </v-btn>
-        <v-container>
-          <EquipmentList :type="equimentType" @equipment-chosen="onChoose">
-            <template #default="{ equipment }">
-              <div
-                v-for="(par, index) in parInfos"
-                :key="`par-${index}`"
-                class="a-equipment__infos mr-1"
-              >
-                {{ par(equipment.par, index) }}
-              </div>
-            </template>
-          </EquipmentList>
-        </v-container>
-      </div>
-    </v-dialog>
+    <EquipmentListDialog
+      v-model="equimentsOpen"
+      :type="equimentType"
+      @equipment-chosen="onChoose"
+    ></EquipmentListDialog>
   </div>
 </template>
 
 <script setup>
-import { ref, shallowRef, toValue, toRaw } from 'vue';
-import { useEquipmentInfos } from '~/composables/useEquipmentInfos.js';
+import { ref, toValue, toRaw } from 'vue';
 import { useDb } from '~/composables/useDb.js';
 import { useRoute, useRouter } from 'vue-router';
 import { useNotify } from '~/composables/useNotify.js';
@@ -174,7 +120,6 @@ const tackle = ref(getNewTackle());
 const db = useDb();
 const router = useRouter();
 const route = useRoute();
-const pars = useEquipmentInfos();
 
 if (route.params.id === 'new') {
   tackle.value = getNewTackle();
@@ -187,8 +132,6 @@ if (route.params.id === 'new') {
     }
   });
 }
-
-const parInfos = shallowRef(pars.rod);
 
 function getNewTackle() {
   return {
@@ -233,7 +176,6 @@ function onChoose(equipment) {
 
 function chooseType(type) {
   equimentType.value = type;
-  parInfos.value = pars[type];
   open();
 }
 
@@ -264,9 +206,6 @@ function save() {
 </script>
 
 <style>
-.a-tackle {
-  position: relative;
-}
 .v-dialog--fullscreen > .v-overlay__content {
   background-color: rgb(var(--v-theme-background));
 }

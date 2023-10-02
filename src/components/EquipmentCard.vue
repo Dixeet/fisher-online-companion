@@ -9,7 +9,13 @@
         <div
           class="text-body-3 font-weight-thin text-disabled d-flex flex-wrap justify-space-between"
         >
-          <slot :equipment="equipment"> </slot>
+          <div
+            v-for="(par, index) in pars[equipment.mainType]"
+            :key="`par-${index}`"
+            class="a-equipment__infos mr-1"
+          >
+            {{ par(equipment.par, index) }}
+          </div>
         </div>
       </div>
     </div>
@@ -21,6 +27,7 @@
 import { VCard } from 'vuetify/components';
 import { computed } from 'vue';
 import { useImageUrl } from '~/composables/useImageUrl.js';
+import { useEquipmentInfos } from '~/composables/useEquipmentInfos.js';
 
 const props = defineProps({
   equipment: {
@@ -32,6 +39,8 @@ const props = defineProps({
     default: undefined,
   },
 });
+
+const pars = useEquipmentInfos();
 
 const imgUrl = computed(() => {
   const id = props.equipment.imgId ?? props.equipment.id;

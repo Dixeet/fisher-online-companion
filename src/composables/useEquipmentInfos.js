@@ -10,7 +10,7 @@ export function useEquipmentInfos() {
     ],
     reel: [
       (par, index) => `Friction: ${par && par[index] ? par[index] : ''}kg`,
-      (par, index) => `Power: ${par && par[index + 1] ? par[index + 1] : ''}mm`,
+      (par, index) => `Power: ${par && par[index + 1] ? par[index + 1] : ''}kg`,
     ],
     line: [
       (par, index) => `Strength: ${par && par[index] ? par[index] : ''}kg`,
