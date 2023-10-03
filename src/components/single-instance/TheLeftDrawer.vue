@@ -2,7 +2,8 @@
   <v-navigation-drawer v-model="open" width="285">
     <TheMapSelector> </TheMapSelector>
     <TheCurrentTackle />
-    <v-btn class="mt-2" to="/tackles" rounded="0" block>Manage Tackles</v-btn>
+    <v-btn variant="flat" class="mt-1 mb-5" to="/tackles" rounded="0" block>Manage Tackles</v-btn>
+    <TheCurrentPosition class="px-2" />
     <template #append>
       <TheDatabaseManager />
     </template>
@@ -11,6 +12,7 @@
 
 <script setup>
 import { useVModel } from '@vueuse/core';
+import TheCurrentPosition from '~/components/single-instance/TheCurrentPosition.vue';
 
 const props = defineProps({
   modelValue: {

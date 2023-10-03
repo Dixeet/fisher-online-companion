@@ -1,7 +1,7 @@
 <template>
   <div v-if="currentTackle.id" class="">
     <EquipmentCard
-      class="a-cursor--pointer mb-2"
+      class="a-cursor--pointer mb-2 rounded-0 elevation-0"
       :equipment="currentTackle[baitOrLure]"
       clearable
       @clear="onClear"
