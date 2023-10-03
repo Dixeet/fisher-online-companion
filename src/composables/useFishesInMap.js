@@ -10,7 +10,7 @@ export function useFishesInMap(mapRef, fishesInMapRef = null) {
       db.mapFishes
         .where('mapId')
         .equals(mapRef.value.id)
-        .toArray()
+        .sortBy('fishName')
         .then((data) => {
           return (fishesInMap.value = data.map((d) => ({
             id: d.fishId,
