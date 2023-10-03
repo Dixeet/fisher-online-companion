@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig, splitVendorChunkPlugin } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { fileURLToPath, URL } from 'node:url';
 import vuetify from 'vite-plugin-vuetify';
@@ -10,6 +10,7 @@ import Components from 'unplugin-vue-components/vite';
 export default defineConfig({
   cacheDir: '.cache/',
   plugins: [
+    splitVendorChunkPlugin(),
     vue(),
     vuetify({ autoImport: true }),
     Icons({

@@ -6,8 +6,24 @@
       </v-icon>
     </div>
     <div class="flex-grow-1">
-      <div class="text-body-2" :class="{ 'a-tackle__single-line': !parResolver }">
-        {{ equipment.name }}
+      <div class="d-flex justify-space-between">
+        <div
+          class="text-body-2 flex-grow-1"
+          :class="{ 'a-tackle__single-line': !parResolver, 'a-cursor--pointer': editable }"
+          @click.stop="$emit('edit')"
+        >
+          {{ equipment.name }}
+        </div>
+        <v-btn
+          v-if="editable && equipment.id"
+          variant="plain"
+          density="compact"
+          size="small"
+          icon
+          @click.stop="$emit('clear')"
+        >
+          <v-icon size="small-xs"><i-mdi-close></i-mdi-close></v-icon>
+        </v-btn>
       </div>
       <div
         v-if="parResolver"
@@ -31,7 +47,13 @@ defineProps({
     type: Array,
     default: null,
   },
+  editable: {
+    type: Boolean,
+    default: false,
+  },
 });
+
+defineEmits(['edit', 'clear']);
 </script>
 
 <style lang="scss">

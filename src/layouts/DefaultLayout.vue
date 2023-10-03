@@ -12,7 +12,7 @@
       </template>
 
       <v-app-bar-title :class="classObj" class="text-body-1 text-align--center">
-        <h1 class="text-body-1">{{ title }}</h1>
+        <h1 class="text-body-1 text-ellipsis">{{ title }}</h1>
       </v-app-bar-title>
 
       <template #append>
@@ -31,7 +31,7 @@
       <v-container :class="classObj">
         <slot />
       </v-container>
-      <v-snackbar v-model="snackbar" :color="snackbarColor" location="top right">
+      <v-snackbar v-model="snackbar" :color="snackbarColor" location="bottom right">
         {{ snackbarText }}
         <template #actions>
           <v-btn icon @click="snackbar = false">
@@ -68,10 +68,6 @@ watch(title, () => {
 .v-toolbar__content {
   > .v-toolbar-title {
     margin-inline-end: 16px;
-    h1 {
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
   }
 }
 .drawer__open {

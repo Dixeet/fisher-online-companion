@@ -84,10 +84,15 @@ function onChoose(equipment) {
 }
 
 function scrollToTop() {
-  window.scroll({
-    top: 0,
-    behavior: 'smooth',
-  });
+  const overlayEl = document.querySelector(
+    'body > div.v-overlay-container > div.v-overlay.v-overlay--active.v-dialog.bg-background > div.v-overlay__content',
+  );
+  if (overlayEl && overlayEl instanceof HTMLElement) {
+    overlayEl.scroll({
+      top: 0,
+      behavior: 'smooth',
+    });
+  }
 }
 </script>
 

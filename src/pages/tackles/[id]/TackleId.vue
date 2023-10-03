@@ -133,10 +133,12 @@ import { useDb } from '~/composables/useDb.js';
 import { useRoute, useRouter } from 'vue-router';
 import { useNotify } from '~/composables/useNotify.js';
 import { useNewTackle } from '~/composables/useEquipmentInfos.js';
+import { useStorage } from '@vueuse/core';
 
 const equimentType = ref('rod');
 const equimentsOpen = ref(false);
 const tackle = ref(useNewTackle());
+const currentTackle = useStorage('currentTackle', {}, undefined, { shallow: true });
 
 const db = useDb();
 const router = useRouter();
@@ -144,6 +146,11 @@ const route = useRoute();
 
 if (route.params.id === 'new') {
   tackle.value = useNewTackle();
+} else if (route.params.id === 'current') {
+  const clonedTackle = structuredClone(toRaw(currentTackle.value));
+  clonedTackle.name = '';
+  delete clonedTackle.id;
+  tackle.value = clonedTackle;
 } else {
   db.tackles.get(parseInt(route.params.id)).then((data) => {
     if (data) {
@@ -198,8 +205,12 @@ function save() {
   } else {
     db.tackles.add(toRaw(toValue(tackle))).then((id) => {
       useNotify('Tackle created', 'quarternary');
-      router.replace({ params: { id } });
     });
+  }
+  if (route.query?.back) {
+    router.push({ path: route.query.back });
+  } else {
+    router.back();
   }
 }
 </script>

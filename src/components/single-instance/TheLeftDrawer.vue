@@ -1,7 +1,8 @@
 <template>
   <v-navigation-drawer v-model="open" width="285">
     <TheMapSelector> </TheMapSelector>
-    <v-btn to="/tackles" rounded="0" block>Manage Tackles</v-btn>
+    <TheCurrentTackle />
+    <v-btn class="mt-2" to="/tackles" rounded="0" block>Manage Tackles</v-btn>
     <template #append>
       <TheDatabaseManager />
     </template>

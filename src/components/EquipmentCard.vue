@@ -12,6 +12,7 @@
           {{ equipment.name }}
         </div>
         <div
+          v-if="equipment.id"
           class="text-body-3 font-weight-thin text-disabled d-flex flex-wrap justify-space-between"
         >
           <div

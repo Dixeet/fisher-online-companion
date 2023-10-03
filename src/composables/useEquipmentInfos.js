@@ -55,33 +55,43 @@ export function useNewTackle() {
     name: '',
     rod: {
       name: 'Choose a rod',
+      mainType: 'rod',
     },
     reel: {
       name: 'Choose a reel',
+      mainType: 'reel',
     },
     line: {
       name: 'Choose a line',
+      mainType: 'line',
     },
     leader: {
       name: 'Choose a leader',
+      mainType: 'leader',
     },
     hook: {
       name: 'Choose a hook',
+      mainType: 'hook',
     },
     lure: {
       name: 'Choose a lure',
+      mainType: 'lure',
     },
     bait: {
       name: 'Choose a bait',
+      mainType: 'bait',
     },
     float: {
       name: 'Choose a float',
+      mainType: 'float',
     },
     feeder: {
       name: 'Choose a feeder',
+      mainType: 'feeder',
     },
     attractant: {
       name: 'Choose a attractant',
+      mainType: 'attractant',
     },
   };
 }

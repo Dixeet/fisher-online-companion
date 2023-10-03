@@ -52,6 +52,12 @@ a {
   text-transform: none !important;
 }
 
+.text-ellipsis{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 @media (hover: none) {
   .a-fish-card {
     &:hover &__icon--hover {
