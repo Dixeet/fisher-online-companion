@@ -119,7 +119,6 @@
 import { useEquipmentInfosShort } from '~/composables/useEquipmentInfos.js';
 import { useStorage } from '@vueuse/core';
 import { computed } from 'vue';
-import TackleSummaryElement from '~/components/TackleSummaryElement.vue';
 
 const props = defineProps({
   tackle: {

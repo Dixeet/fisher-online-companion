@@ -1,7 +1,7 @@
 <template>
-  <DefaultLayout>
+  <LayoutDefault>
     <TheRouter />
-  </DefaultLayout>
+  </LayoutDefault>
 </template>
 
 <script setup></script>
