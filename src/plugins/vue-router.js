@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import MainPage from '~/pages/MainPage.vue';
 import { useTitle } from '@vueuse/core';
 import { useState } from '~/composables/useState.js';
-import MapAddFishesPage from '~/pages/maps/[id]/MapAddFishesPage.vue';
-import TacklesPage from '~/pages/tackles/TacklesPage.vue';
-import TackleId from '~/pages/tackles/[id]/TackleId.vue';
+import MainPage from '~/pages/main.vue';
+import MapAddFishesPage from '~/pages/maps/[id]/maps-[id]-add-fish.vue';
+import TacklesPage from '~/pages/tackles/tackles.vue';
+import TackleId from '~/pages/tackles/[id]/tackles-[id].vue';
 
 const mainTitle = 'Fisher Online Companion';
 const routes = [
