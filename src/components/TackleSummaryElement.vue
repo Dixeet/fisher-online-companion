@@ -5,10 +5,10 @@
         <slot />
       </v-icon>
     </div>
-    <div class="flex-grow-1">
+    <div class="flex-grow-1" style="min-width: 0">
       <div class="d-flex justify-space-between">
         <div
-          class="text-body-2 flex-grow-1"
+          class="flex-grow-1 text-body-2 text-ellipsis"
           :class="{ 'a-tackle__single-line': !parResolver, 'a-cursor--pointer': editable }"
           @click.stop="$emit('edit')"
         >

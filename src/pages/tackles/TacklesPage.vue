@@ -7,7 +7,7 @@
         :key="`tackle-${index}`"
         class="v-col-12 v-col-sm-6 v-col-md-4 v-col-xl-2"
       >
-        <TackleSummary :tackle="tackle"></TackleSummary>
+        <TackleSummary selectable :tackle="tackle"></TackleSummary>
       </div>
     </div>
   </div>

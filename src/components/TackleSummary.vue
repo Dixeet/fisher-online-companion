@@ -1,18 +1,19 @@
 <template>
   <div class="a-tackle bg-surface px-2 pb-2">
-    <div class="text-align--center pa-1 d-flex align-center justify-space-betweene">
+    <div class="text-align--center pa-1 d-flex align-center justify-space-between">
       <div>
         <v-btn
-          color="success"
-          :variant="isCurrentTackle ? 'tonal' : 'plain'"
-          :active="isCurrentTackle"
+          v-if="isCurrentTackle || selectable"
+          :color="isCurrentTackle ? 'error' : 'success'"
+          variant="text"
           icon
           size="small"
           density="comfortable"
           @click.stop="toggleCurrent"
         >
           <v-icon size="small">
-            <i-mdi-check></i-mdi-check>
+            <i-mdi-close v-if="isCurrentTackle"></i-mdi-close>
+            <i-mdi-check v-else></i-mdi-check>
           </v-icon>
         </v-btn>
       </div>
@@ -130,6 +131,10 @@ const props = defineProps({
     required: false,
   },
   editable: {
+    type: Boolean,
+    default: false,
+  },
+  selectable: {
     type: Boolean,
     default: false,
   },

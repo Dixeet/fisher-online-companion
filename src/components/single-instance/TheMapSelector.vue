@@ -1,7 +1,16 @@
 <template>
   <div class="a-map-selector">
     <router-link to="/">
-      <v-img height="142" :src="mapImageUrl"> </v-img>
+      <v-img :src="mapImageUrl">
+        <div
+          class="d-flex justify-center align-center h-100"
+          style="background: rgba(0, 0, 0, 0.3); padding: 10px"
+        >
+          <div class="text-h6">
+            <v-icon><i-game-boat-fishing></i-game-boat-fishing></v-icon> Go Fishing
+          </div>
+        </div>
+      </v-img>
     </router-link>
     <v-select
       v-model="map"

@@ -1,14 +1,18 @@
 <template>
   <div v-if="currentTackle.id" class="">
+    <TackleSummary short editable :tackle="currentTackle" @clear="onClear" @edit="onEdit" />
     <EquipmentCard
-      class="a-cursor--pointer mb-2 rounded-0 elevation-0"
+      class="a-cursor--pointer rounded-0 elevation-0"
       :equipment="currentTackle[baitOrLure]"
       clearable
+      style="
+        border-top: thin solid rgba(var(--v-border-color), var(--v-border-opacity));
+        border-bottom: thin solid rgba(var(--v-border-color), var(--v-border-opacity));
+      "
       @clear="onClear"
       @click.stop="onEdit({ mainType: baitOrLure })"
     >
     </EquipmentCard>
-    <TackleSummary short editable :tackle="currentTackle" @clear="onClear" @edit="onEdit" />
     <EquipmentListDialog
       v-model="equimentsOpen"
       :type="equimentType"
