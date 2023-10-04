@@ -43,6 +43,32 @@ a {
   z-index: 5;
 }
 
+.tooltip {
+  position:relative;
+  &:before {
+    content: attr(data-text);
+    position:absolute;
+    bottom:100%;
+    transform:translateX(-25%);
+    text-transform: none;
+    margin-bottom:5px;
+    font-size: 0.875rem;
+    width: max-content;
+    padding:5px 10px;
+    border-radius:2px;
+    background:rgb(var(--v-theme-surface-variant));
+    color: rgb(var(--v-theme-on-surface-variant));
+    text-align:center;
+    opacity:0;
+    transition:.3s opacity ease-out;
+  }
+  &:hover:before {
+    opacity: 1;
+  }
+}
+
+
+
 .text-body-3 {
   font-size: 0.8rem !important;
   font-weight: 400;
