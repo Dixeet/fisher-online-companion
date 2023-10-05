@@ -7,7 +7,7 @@
           style="background: rgba(0, 0, 0, 0.3); padding: 10px"
         >
           <div class="text-h6">
-            <v-icon><i-game-boat-fishing></i-game-boat-fishing></v-icon> Go Fishing
+            <v-icon><i-game-fishing-pole></i-game-fishing-pole></v-icon> Go Fishing
           </div>
         </div>
       </v-img>

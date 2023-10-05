@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="d-flex flex-wrap mb-5">
-      <v-btn :prepend-icon="IconPlus" to="/maps/current/add-fishes">Add Fishes To Lake</v-btn>
+      <v-btn to="/maps/current/add-fishes">Add Fishes To {{ map.name }}</v-btn>
     </div>
 
     <FishListCard :fishes="fishes">
@@ -23,14 +23,14 @@
               <v-btn
                 class="tooltip"
                 data-text="Quick add"
-                color="primary"
+                color="tertiary"
                 icon
                 variant="text"
                 density="comfortable"
                 @click.stop="quickAddCatch(fish)"
               >
-                <v-icon>
-                  <i-mdi-plus></i-mdi-plus>
+                <v-icon size="large">
+                  <i-game-fishing></i-game-fishing>
                 </v-icon>
               </v-btn>
               <v-btn
@@ -41,13 +41,20 @@
                 density="comfortable"
                 :to="`/maps/${map.id}/${fish.id}/add-catch`"
               >
-                <v-icon size="small">
-                  <i-mdi-pencil-plus></i-mdi-pencil-plus>
+                <v-icon>
+                  <i-game-lucky-fisherman></i-game-lucky-fisherman>
                 </v-icon>
               </v-btn>
-              <v-btn class="tooltip" data-text="List" icon variant="plain" density="comfortable">
+              <v-btn
+                class="tooltip"
+                data-text="List"
+                icon
+                variant="plain"
+                density="comfortable"
+                :to="`/maps/${map.id}/${fish.id}`"
+              >
                 <v-icon>
-                  <i-mdi-playlist-edit></i-mdi-playlist-edit>
+                  <i-game-fish-bucket></i-game-fish-bucket>
                 </v-icon>
               </v-btn>
             </div>
@@ -59,7 +66,6 @@
 </template>
 
 <script setup>
-import IconPlus from '~icons/mdi/plus';
 import IconMinus from '~icons/mdi/minus-circle-outline';
 import { useFishesInMap } from '~/composables/useFishesInMap.js';
 import { useStorage } from '@vueuse/core';

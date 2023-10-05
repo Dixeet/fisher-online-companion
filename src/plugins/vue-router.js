@@ -38,6 +38,16 @@ const routes = [
       customKey: (to) => to.path,
     },
   },
+  {
+    path: '/maps/:id/:fishId',
+    component: () => import('~/pages/maps/[id]/[fishId]/maps-[id]-[fishId].vue'),
+    name: 'ListCatches',
+    meta: {
+      documentTitle: `List catches - ${mainTitle}`,
+      title: 'List catches',
+      customKey: (to) => to.path,
+    },
+  },
 ];
 
 const router = createRouter({

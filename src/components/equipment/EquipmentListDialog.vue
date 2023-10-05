@@ -34,4 +34,8 @@ function onChoose(equipment) {
 }
 </script>
 
-<style></style>
+<style>
+.v-dialog--fullscreen > .v-overlay__content {
+  background-color: rgb(var(--v-theme-background));
+}
+</style>

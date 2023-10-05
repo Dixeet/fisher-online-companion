@@ -215,8 +215,4 @@ function save() {
 }
 </script>
 
-<style>
-.v-dialog--fullscreen > .v-overlay__content {
-  background-color: rgb(var(--v-theme-background));
-}
-</style>
+<style></style>

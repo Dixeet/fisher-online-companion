@@ -35,7 +35,7 @@ export function useFetchTableRecords(
     let reqData = request(db, filter);
     if ((isRef(filter) && filter?.value !== oldFilterValue) || count?.value === null) {
       oldFilterValue = filter?.value;
-      request(db, filter).count((res) => (count.value = res));
+      toCount();
       if (isRef(pageNumber)) {
         pageNumber.value = 1;
       }
@@ -47,5 +47,9 @@ export function useFetchTableRecords(
     reqData.toArray((res) => (data.value = res));
   }
 
-  return { data, count, numberOfPages, page: pageNumber, query };
+  function toCount() {
+    request(db, filter).count((res) => (count.value = res));
+  }
+
+  return { data, count, numberOfPages, page: pageNumber, query, toCount };
 }

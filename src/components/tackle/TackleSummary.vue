@@ -152,8 +152,4 @@ function toggleCurrent() {
 }
 </script>
 
-<style>
-.a-tackle {
-  height: 100%;
-}
-</style>
+<style></style>
