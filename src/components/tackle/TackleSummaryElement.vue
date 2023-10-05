@@ -1,9 +1,7 @@
 <template>
   <div class="d-flex align-center">
     <div class="mr-2">
-      <v-icon size="large">
-        <slot />
-      </v-icon>
+      <img class="d-block" width="32" :src="imgUrl" onerror="this.removeAttribute('src')" />
     </div>
     <div class="flex-grow-1" style="min-width: 0">
       <div class="d-flex justify-space-between">
@@ -38,7 +36,10 @@
 </template>
 
 <script setup>
-defineProps({
+import { computed } from 'vue';
+import { useImageUrl } from '~/composables/useImageUrl.js';
+
+const props = defineProps({
   equipment: {
     type: Object,
     required: true,
@@ -53,11 +54,16 @@ defineProps({
   },
 });
 
+const imgUrl = computed(() => {
+  const id = props.equipment.imgId ?? props.equipment.id;
+  return id ? useImageUrl(`weapons/${id}.webp`) : null;
+});
+
 defineEmits(['edit', 'clear']);
 </script>
 
 <style lang="scss">
 .a-tackle__single-line {
-  line-height: 32px;
+  line-height: 32px !important;
 }
 </style>

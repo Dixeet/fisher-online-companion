@@ -5,19 +5,22 @@ import { cwd } from 'node:process';
 const COMMAND = 'cwebp';
 
 export default function generateImages(weapons, fishes, maps, outputDir, sourceDir) {
-  generate(weapons, outputDir, sourceDir, 'Weapons', 'weapons');
+  generate(weapons, outputDir, sourceDir, 'Weapons', 'weapons', ['-q', '60', '-resize', '64', '0']);
   generate(fishes, outputDir, sourceDir, 'Fish', 'fishes');
   generate(maps, outputDir, sourceDir, 'Bases', 'maps');
 }
 
-function generate(array, outputDir, sourceDir, dir, dirPrefix) {
+function generate(
+  array,
+  outputDir,
+  sourceDir,
+  dir,
+  dirPrefix,
+  cliOptions = ['-q', '60', '-resize', '300', '0'],
+) {
   for (const el of array) {
     const commandArgs = [
-      '-q',
-      '70',
-      '-resize',
-      '384',
-      '0',
+      ...cliOptions,
       getPath(sourceDir, dir, `${el.id}.png`),
       '-o',
       getPath(outputDir, dirPrefix, `${el.id}.webp`),

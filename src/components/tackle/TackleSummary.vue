@@ -1,6 +1,6 @@
 <template>
-  <div class="a-tackle bg-surface px-2 pb-2">
-    <div class="text-align--center pa-1 d-flex align-center justify-space-between">
+  <div class="a-tackle bg-surface pa-2 pb-2">
+    <div v-if="!withoutHeader" class="text-align--center d-flex align-center justify-space-between">
       <div>
         <v-btn
           v-if="isCurrentTackle || selectable"
@@ -34,7 +34,6 @@
       @clear="$emit('clear', tackle.rod)"
       @edit="$emit('edit', tackle.rod)"
     >
-      <i-game-fishing-pole></i-game-fishing-pole>
     </TackleSummaryElement>
     <TackleSummaryElement
       v-if="tackle.reel?.id || editable"
@@ -44,7 +43,6 @@
       @clear="$emit('clear', tackle.reel)"
       @edit="$emit('edit', tackle.reel)"
     >
-      <i-game-film-spool></i-game-film-spool>
     </TackleSummaryElement>
     <TackleSummaryElement
       v-if="tackle.line?.id || editable"
@@ -64,7 +62,6 @@
       @clear="$emit('clear', tackle.float)"
       @edit="$emit('edit', tackle.float)"
     >
-      <i-game-joint style="transform: rotate(-135deg)"></i-game-joint>
     </TackleSummaryElement>
     <TackleSummaryElement
       v-if="tackle.leader?.id || editable"
@@ -74,7 +71,6 @@
       @clear="$emit('clear', tackle.leader)"
       @edit="$emit('edit', tackle.leader)"
     >
-      <i-game-skipping-rope></i-game-skipping-rope>
     </TackleSummaryElement>
     <TackleSummaryElement
       v-if="(tackle.feeder?.id || editable) && tackle.rod.type?.name === 'Feeder rod' && !short"
@@ -83,7 +79,6 @@
       @clear="$emit('clear', tackle.feeder)"
       @edit="$emit('edit', tackle.feeder)"
     >
-      <i-game-full-wood-bucket></i-game-full-wood-bucket>
     </TackleSummaryElement>
     <TackleSummaryElement
       v-if="tackle.hook?.id || editable"
@@ -92,7 +87,6 @@
       @clear="$emit('clear', tackle.hook)"
       @edit="$emit('edit', tackle.hook)"
     >
-      <i-game-fishing-hook></i-game-fishing-hook>
     </TackleSummaryElement>
     <TackleSummaryElement
       v-if="(tackle.bait?.id || editable) && !short"
@@ -101,7 +95,6 @@
       @clear="$emit('clear', tackle.bait)"
       @edit="$emit('edit', tackle.bait)"
     >
-      <i-game-earth-worm></i-game-earth-worm>
     </TackleSummaryElement>
     <TackleSummaryElement
       v-if="(tackle.lure?.id || editable) && tackle.rod.type?.name === 'Spinning rod' && !short"
@@ -110,7 +103,6 @@
       @clear="$emit('clear', tackle.lure)"
       @edit="$emit('edit', tackle.lure)"
     >
-      <i-game-fishing-lure></i-game-fishing-lure>
     </TackleSummaryElement>
   </div>
 </template>
@@ -134,6 +126,10 @@ const props = defineProps({
     default: false,
   },
   selectable: {
+    type: Boolean,
+    default: false,
+  },
+  withoutHeader: {
     type: Boolean,
     default: false,
   },

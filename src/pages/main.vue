@@ -6,7 +6,7 @@
 
     <FishListCard :fishes="fishes">
       <template #default="{ fish }">
-        <FishCard style="overflow: visible" :fish="fish">
+        <FishCard style="overflow: visible" width="300" :fish="fish">
           <template #image-content>
             <v-btn
               class="ma-1 a-fish-card__icon--hover"

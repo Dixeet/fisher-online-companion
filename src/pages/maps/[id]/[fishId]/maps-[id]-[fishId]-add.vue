@@ -1,7 +1,14 @@
 <template>
   <form class="mx-auto" style="width: 300px" @submit.prevent="add">
     <FishCard v-if="fish" width="175" :fish="fish"></FishCard>
-    <TackleSummary class="my-5" :tackle="tackle" editable @clear="onClear" @edit="onEdit" />
+    <TackleSummary
+      class="my-5"
+      :tackle="tackle"
+      without-header
+      editable
+      @clear="onClear"
+      @edit="onEdit"
+    />
     <PositionField v-model="position"></PositionField>
     <v-btn color="primary" type="submit" block>Add</v-btn>
     <EquipmentListDialog

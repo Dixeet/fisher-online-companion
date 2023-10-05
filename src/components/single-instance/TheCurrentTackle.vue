@@ -26,6 +26,8 @@ import { useStorage } from '@vueuse/core';
 import { computed, ref } from 'vue';
 import { useNewTackle } from '~/composables/useEquipmentInfos.js';
 
+let modified = false;
+
 const currentTackle = useStorage('currentTackle', {});
 const equimentType = ref('rod');
 const equimentsOpen = ref(false);
@@ -66,7 +68,10 @@ function close() {
 }
 
 function modify() {
-  currentTackle.value.id = 'current';
+  if (!modified) {
+    currentTackle.value.name = '';
+    currentTackle.value.id = 'current';
+  }
 }
 </script>
 
