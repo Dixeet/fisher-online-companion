@@ -1,36 +1,42 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { useTitle } from '@vueuse/core';
 import { useState } from '~/composables/useState.js';
-import MainPage from '~/pages/main.vue';
-import MapAddFishesPage from '~/pages/maps/[id]/maps-[id]-add-fish.vue';
-import TacklesPage from '~/pages/tackles/tackles.vue';
-import TackleId from '~/pages/tackles/[id]/tackles-[id].vue';
 
 const mainTitle = 'Fisher Online Companion';
 const routes = [
   {
     path: '/',
     name: 'MainPage',
-    component: MainPage,
+    component: () => import('~/pages/main.vue'),
     meta: { title: mainTitle, documentTitle: mainTitle },
   },
   {
     path: '/maps/:id/add-fishes',
-    component: MapAddFishesPage,
+    component: () => import('~/pages/maps/[id]/maps-[id]-add-fish.vue'),
     name: 'PageMapAddFishes',
     meta: { documentTitle: `Add fishes to location - ${mainTitle}`, customKey: (to) => to.path },
   },
   {
     path: '/tackles',
-    component: TacklesPage,
+    component: () => import('~/pages/tackles/tackles.vue'),
     name: 'TacklesPage',
     meta: { documentTitle: `Manage tackles - ${mainTitle}`, title: 'Manage tackles' },
   },
   {
     path: '/tackles/:id',
-    component: TackleId,
+    component: () => import('~/pages/tackles/[id]/tackles-[id].vue'),
     name: 'TackleId',
     meta: { documentTitle: `Edit tackle - ${mainTitle}`, customKey: (to) => to.path },
+  },
+  {
+    path: '/maps/:id/:fishId/add-catch',
+    component: () => import('~/pages/maps/[id]/[fishId]/maps-[id]-[fishId]-add.vue'),
+    name: 'MapAddCatch',
+    meta: {
+      documentTitle: `Add a catch - ${mainTitle}`,
+      title: 'Add a catch',
+      customKey: (to) => to.path,
+    },
   },
 ];
 

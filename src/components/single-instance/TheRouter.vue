@@ -9,9 +9,7 @@
   <RouterView :key="$route.meta?.routerKey" v-slot="{ Component }">
     <template v-if="Component">
       <Transition name="fade" mode="out-in">
-        <Suspense @pending="active = true" @resolve="active = false">
-          <component :is="Component"></component>
-        </Suspense>
+        <component :is="Component"></component>
       </Transition>
     </template>
   </RouterView>

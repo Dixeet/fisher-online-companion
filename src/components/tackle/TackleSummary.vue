@@ -27,7 +27,7 @@
       </div>
     </div>
     <TackleSummaryElement
-      v-if="tackle.rod?.id"
+      v-if="tackle.rod?.id || editable"
       :equipment="tackle.rod"
       :par-resolver="pars.rod"
       :editable="editable"
@@ -37,7 +37,7 @@
       <i-game-fishing-pole></i-game-fishing-pole>
     </TackleSummaryElement>
     <TackleSummaryElement
-      v-if="tackle.reel?.id"
+      v-if="tackle.reel?.id || editable"
       :equipment="tackle.reel"
       :par-resolver="pars.reel"
       :editable="editable"
@@ -47,7 +47,7 @@
       <i-game-film-spool></i-game-film-spool>
     </TackleSummaryElement>
     <TackleSummaryElement
-      v-if="tackle.line?.id"
+      v-if="tackle.line?.id || editable"
       :equipment="tackle.line"
       :par-resolver="pars.line"
       :editable="editable"
@@ -57,7 +57,7 @@
       <i-game-wire-coil></i-game-wire-coil>
     </TackleSummaryElement>
     <TackleSummaryElement
-      v-if="tackle.float?.id && !short"
+      v-if="(tackle.float?.id || editable) && tackle.rod.type?.name === 'Float rod' && !short"
       :equipment="tackle.float"
       :par-resolver="pars.float"
       :editable="editable"
@@ -67,7 +67,7 @@
       <i-game-joint style="transform: rotate(-135deg)"></i-game-joint>
     </TackleSummaryElement>
     <TackleSummaryElement
-      v-if="tackle.leader?.id"
+      v-if="tackle.leader?.id || editable"
       :equipment="tackle.leader"
       :par-resolver="pars.leader"
       :editable="editable"
@@ -77,7 +77,7 @@
       <i-game-skipping-rope></i-game-skipping-rope>
     </TackleSummaryElement>
     <TackleSummaryElement
-      v-if="tackle.feeder?.id && !short"
+      v-if="(tackle.feeder?.id || editable) && tackle.rod.type?.name === 'Feeder rod' && !short"
       :equipment="tackle.feeder"
       :editable="editable"
       @clear="$emit('clear', tackle.feeder)"
@@ -86,7 +86,7 @@
       <i-game-full-wood-bucket></i-game-full-wood-bucket>
     </TackleSummaryElement>
     <TackleSummaryElement
-      v-if="tackle.hook?.id || short"
+      v-if="tackle.hook?.id || editable"
       :equipment="tackle.hook"
       :editable="editable"
       @clear="$emit('clear', tackle.hook)"
@@ -95,7 +95,7 @@
       <i-game-fishing-hook></i-game-fishing-hook>
     </TackleSummaryElement>
     <TackleSummaryElement
-      v-if="tackle.bait?.id && !short"
+      v-if="(tackle.bait?.id || editable) && !short"
       :equipment="tackle.bait"
       :editable="editable"
       @clear="$emit('clear', tackle.bait)"
@@ -104,7 +104,7 @@
       <i-game-earth-worm></i-game-earth-worm>
     </TackleSummaryElement>
     <TackleSummaryElement
-      v-if="tackle.lure?.id && !short"
+      v-if="(tackle.lure?.id || editable) && tackle.rod.type?.name === 'Spinning rod' && !short"
       :equipment="tackle.lure"
       :editable="editable"
       @clear="$emit('clear', tackle.lure)"

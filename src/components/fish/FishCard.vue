@@ -1,9 +1,8 @@
 <template>
   <div
     class="v-card v-theme--dark v-card--density-default v-card--variant-elevated mx-auto a-fish-card"
-    :style="{ 'max-width': `${width}px` }"
   >
-    <div class="v-responsive v-img v-img--booting">
+    <div class="v-responsive v-img v-img--booting mx-auto" :style="{ 'max-width': `${width}px` }">
       <div class="v-responsive__sizer" style="padding-bottom: 50%"></div>
       <img
         :alt="fish.name"
@@ -18,7 +17,7 @@
       </div>
     </div>
     <div class="v-card-title text-align--center">{{ fish.name }}</div>
-    <div class="v-card-text"><slot /></div>
+    <slot></slot>
   </div>
 </template>
 

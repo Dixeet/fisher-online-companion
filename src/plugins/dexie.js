@@ -55,6 +55,10 @@ function migrate(db) {
     tackles: '++id,name,rod.id,rod.type.id,rod.subtype',
   });
 
+  db.version(5).stores({
+    catches: '++id,mapId,fishId',
+  });
+
   /*
   To refresh with new data,
   use code below and increment VERSION_NUMBER according to the previous one

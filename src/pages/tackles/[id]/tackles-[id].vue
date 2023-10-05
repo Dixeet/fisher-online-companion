@@ -146,7 +146,7 @@ const route = useRoute();
 
 if (route.params.id === 'new') {
   tackle.value = useNewTackle();
-} else if (route.params.id === 'current') {
+} else if (route.params.id === 'current' || route.params.id === 'copy') {
   const clonedTackle = structuredClone(toRaw(currentTackle.value));
   clonedTackle.name = '';
   delete clonedTackle.id;
@@ -203,7 +203,7 @@ function save() {
       useNotify('Tackle updated', 'quarternary');
     });
   } else {
-    db.tackles.add(toRaw(toValue(tackle))).then((id) => {
+    db.tackles.add(toRaw(toValue(tackle))).then(() => {
       useNotify('Tackle created', 'quarternary');
     });
   }
