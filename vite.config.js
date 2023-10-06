@@ -28,6 +28,9 @@ export default defineConfig({
       ],
     }),
   ],
+  build: {
+    assetsInlineLimit: 512,
+  },
   resolve: {
     alias: {
       '~': fileURLToPath(new URL('./src', import.meta.url)),
