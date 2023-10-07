@@ -7,7 +7,7 @@
         <v-btn active variant="flat" class="mb-5" to="/tackles" rounded="0" block>Tackles</v-btn>
         <TheCurrentPosition class="px-2" />
       </div>
-      <TheDatabaseManager />
+      <TheLeftDrawerFooter />
     </div>
   </v-navigation-drawer>
 </template>

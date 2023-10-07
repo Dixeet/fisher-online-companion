@@ -48,6 +48,15 @@ const routes = [
       customKey: (to) => to.path,
     },
   },
+  {
+    path: '/database-manager',
+    component: () => import('~/pages/database-manager.vue'),
+    name: 'DatabaseManager',
+    meta: {
+      documentTitle: `Database Manager - ${mainTitle}`,
+      title: 'Database Manager',
+    },
+  },
 ];
 
 const router = createRouter({

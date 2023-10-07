@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="d-flex flex-wrap mb-5">
-      <v-btn to="/maps/current/add-fishes">Add Fishes To {{ map.name }}</v-btn>
+      <v-btn variant="flat" to="/maps/current/add-fishes">Add Fishes To {{ map.name }}</v-btn>
     </div>
 
     <FishListCard :fishes="fishes">
