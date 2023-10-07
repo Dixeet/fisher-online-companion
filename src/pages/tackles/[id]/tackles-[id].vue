@@ -116,7 +116,7 @@
         </EquipmentCard>
       </div>
 
-      <v-btn class="mt-5" color="primary" type="submit" block>Save</v-btn>
+      <v-btn alt="Save tackle" class="mt-5" color="primary" type="submit" block>Save</v-btn>
     </form>
 
     <EquipmentListDialog

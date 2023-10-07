@@ -5,7 +5,13 @@
   >
     <div class="d-flex align-center">
       <div class="ml-3 my-2">
-        <img class="d-block" height="48" :src="imgUrl" onerror="this.removeAttribute('src')" />
+        <img
+          :alt="imgUrl ? equipment.name : undefined"
+          class="d-block"
+          height="48"
+          :src="imgUrl"
+          onerror="this.removeAttribute('src');this.removeAttribute('alt')"
+        />
       </div>
       <div class="v-col">
         <div class="text-align--center text-body-1">
@@ -27,6 +33,7 @@
     </div>
     <v-btn
       v-if="clearable && equipment.id"
+      alt="Clear equipment"
       class="a-equipment-card__delete-button"
       variant="text"
       density="compact"

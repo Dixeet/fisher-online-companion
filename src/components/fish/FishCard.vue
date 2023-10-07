@@ -5,7 +5,7 @@
     <div class="v-responsive v-img v-img--booting mx-auto" :style="{ 'max-width': `${width}px` }">
       <div class="v-responsive__sizer" style="padding-bottom: 50%"></div>
       <img
-        :alt="fish.name"
+        :alt="fishImgUrl ? fish.name : undefined"
         class="v-img__img v-img__img--contain"
         :src="fishImgUrl"
         onerror="this.style.filter = 'invert(0.8)';this.src='/images/fallback-fish.svg'"

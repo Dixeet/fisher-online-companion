@@ -1,7 +1,7 @@
 <template>
   <div class="a-map-selector">
     <router-link to="/">
-      <v-img :src="mapImageUrl">
+      <v-img :alt="map.name" :src="mapImageUrl">
         <div
           class="d-flex justify-center align-center h-100"
           style="background: rgba(0, 0, 0, 0.3); padding: 10px"

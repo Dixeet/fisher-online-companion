@@ -9,6 +9,7 @@
         <FishCard style="overflow: visible" width="300" :fish="fish">
           <template #image-content>
             <v-btn
+              alt="Remove fish from map"
               class="ma-1 a-fish-card__icon--hover"
               size="large"
               color="error"
@@ -21,6 +22,7 @@
           <template #default>
             <div class="d-flex justify-space-between px-2 mb-2">
               <v-btn
+                alt="Quick add a catch"
                 class="tooltip"
                 data-text="Quick add"
                 color="tertiary"
@@ -34,6 +36,7 @@
                 </v-icon>
               </v-btn>
               <v-btn
+                alt="Add a catch"
                 class="tooltip"
                 data-text="Add a catch"
                 icon
@@ -46,6 +49,7 @@
                 </v-icon>
               </v-btn>
               <v-btn
+                alt="List catches"
                 class="tooltip"
                 data-text="List"
                 icon

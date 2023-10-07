@@ -9,6 +9,7 @@
         color="error"
         variant="text"
         size="small"
+        alt="Remove catch"
         density="comfortable"
         @click.stop="remove"
       >

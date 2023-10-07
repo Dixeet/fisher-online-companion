@@ -18,6 +18,7 @@
           <template #image-content>
             <v-btn
               v-if="fishInMap(fish)"
+              alt="Remove fish from map"
               class="ma-1"
               size="large"
               color="error"
@@ -28,6 +29,7 @@
             />
             <v-btn
               v-else
+              alt="Add fish to map"
               class="ma-1 a-fish-card__icon--hover"
               size="large"
               color="success"

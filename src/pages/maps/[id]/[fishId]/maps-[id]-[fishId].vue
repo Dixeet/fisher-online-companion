@@ -2,10 +2,16 @@
   <div>
     <div class="d-flex align-center">
       <div class="mr-2">
-        <img class="d-block" width="88" :src="fishUrl" onerror="this.removeAttribute('src')" />
+        <img
+          :alt="fishUrl ? fish.name : undefined"
+          class="d-block"
+          width="88"
+          :src="fishUrl"
+          onerror="this.removeAttribute('src');this.removeAttribute('alt')"
+        />
       </div>
       <h4>{{ count }} {{ fish.name }} caught in {{ map.name }}</h4>
-      <v-btn class="ml-2" variant="text" @click.stop="clear">clear</v-btn>
+      <v-btn alt="Clear catches" class="ml-2" variant="text" @click.stop="clear">clear</v-btn>
     </div>
     <v-divider class="mb-3 mt-1" />
     <div class="mb-5">
@@ -19,10 +25,11 @@
           >
             <div class="mr-2">
               <img
+                :alt="bait.img ? bait.name : undefined"
                 class="d-block"
                 width="32"
                 :src="bait.img"
-                onerror="this.removeAttribute('src')"
+                onerror="this.removeAttribute('src');this.removeAttribute('alt')"
               />
             </div>
             <div class="flex-grow-1" style="min-width: 0">

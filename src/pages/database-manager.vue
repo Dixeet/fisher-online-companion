@@ -7,6 +7,7 @@
         class="flex-grow-1"
         rounded="0"
         variant="tonal"
+        alt="Refresh game data"
         :prepend-icon="IconRefreshDB"
         :loading="loadingRefetch"
         @click.stop="refetchData"
@@ -18,6 +19,7 @@
         color="accent"
         rounded="0"
         variant="tonal"
+        alt="Delete Database"
         :prepend-icon="IconDeleteDB"
         :loading="loadingDelete"
         @click.stop="deleteClick"
@@ -47,6 +49,7 @@
         label="Catches"
       ></v-checkbox>
       <v-btn
+        alt="Clear data selected"
         class="flex-grow-1"
         rounded="0"
         variant="tonal"
@@ -59,7 +62,13 @@
     <h2 class="text-h6 mt-5">Export</h2>
     <v-divider class="mt-2 mb-2" />
     <div>
-      <v-btn rounded="0" variant="tonal" :prepend-icon="IconExport" @click.stop="exportData">
+      <v-btn
+        alt="Export"
+        rounded="0"
+        variant="tonal"
+        :prepend-icon="IconExport"
+        @click.stop="exportData"
+      >
         Export
       </v-btn>
     </div>
@@ -77,6 +86,7 @@
         :prepend-icon="IconImport"
       ></v-file-input>
       <v-btn
+        alt="Import"
         class="flex-grow-1"
         rounded="0"
         variant="tonal"
@@ -91,8 +101,10 @@
         <!-- eslint-disable-next-line vue/no-v-text-v-html-on-component vue/no-v-html-->
         <v-card-text v-html="dialog.text"> </v-card-text>
         <v-card-actions class="justify-space-between">
-          <v-btn color="warning" @click.stop="dialog.continueFn">{{ dialog.continueText }}</v-btn>
-          <v-btn variant="plain" @click="openDialog = false">Cancel</v-btn>
+          <v-btn :alt="dialog.continueText" color="warning" @click.stop="dialog.continueFn">{{
+            dialog.continueText
+          }}</v-btn>
+          <v-btn alt="Cancel" variant="plain" @click="openDialog = false">Cancel</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

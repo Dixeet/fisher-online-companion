@@ -10,7 +10,7 @@
       @edit="onEdit"
     />
     <PositionField v-model="position"></PositionField>
-    <v-btn color="primary" type="submit" block>Add</v-btn>
+    <v-btn alt="Add a catch" color="primary" type="submit" block>Add</v-btn>
     <EquipmentListDialog
       v-model="equimentsOpen"
       :type="equimentType"

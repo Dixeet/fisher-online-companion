@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="equimentsOpen" class="bg-background" fullscreen>
     <div class="bg-background">
-      <v-btn size="small" class="ma-2" icon dark @click="equimentsOpen = false">
+      <v-btn alt="Close modal" size="small" class="ma-2" icon @click="equimentsOpen = false">
         <v-icon>
           <i-mdi-close></i-mdi-close>
         </v-icon>

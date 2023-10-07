@@ -21,6 +21,7 @@
     </v-app-bar>
 
     <v-btn
+      alt="Open Drawer"
       class="d-lg-none drawer__open"
       variant="tonal"
       :icon="IconToolbox"
@@ -34,7 +35,7 @@
       <v-snackbar v-model="snackbar" :color="snackbarColor" location="bottom right">
         {{ snackbarText }}
         <template #actions>
-          <v-btn icon @click="snackbar = false">
+          <v-btn alt="Close Notification" icon @click="snackbar = false">
             <v-icon> <i-mdi-close></i-mdi-close> </v-icon>
           </v-btn>
         </template>

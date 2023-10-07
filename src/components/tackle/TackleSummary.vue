@@ -4,6 +4,7 @@
       <div>
         <v-btn
           v-if="isCurrentTackle || selectable"
+          alt="Add or remove tackle as current tackle"
           :color="isCurrentTackle ? 'error' : 'success'"
           variant="text"
           icon

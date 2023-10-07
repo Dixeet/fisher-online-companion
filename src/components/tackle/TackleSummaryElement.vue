@@ -1,7 +1,13 @@
 <template>
   <div class="d-flex align-center">
     <div class="mr-2">
-      <img class="d-block" width="32" :src="imgUrl" onerror="this.removeAttribute('src')" />
+      <img
+        :alt="imgUrl ? equipment.name : undefined"
+        class="d-block"
+        width="32"
+        :src="imgUrl"
+        onerror="this.removeAttribute('src');this.removeAttribute('alt')"
+      />
     </div>
     <div class="flex-grow-1" style="min-width: 0">
       <div class="d-flex justify-space-between">
@@ -14,6 +20,7 @@
         </div>
         <v-btn
           v-if="editable && equipment.id"
+          alt="Remove equipment"
           variant="plain"
           density="compact"
           size="small"
