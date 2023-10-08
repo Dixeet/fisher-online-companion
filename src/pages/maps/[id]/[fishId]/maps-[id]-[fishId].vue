@@ -10,10 +10,10 @@
           onerror="this.removeAttribute('src');this.removeAttribute('alt')"
         />
       </div>
-      <h4>{{ count }} {{ fish.name }} caught in {{ map.name }}</h4>
+      <h2 class="text-h6">{{ count }} {{ fish.name }} caught in {{ map.name }}</h2>
       <v-btn alt="Clear catches" class="ml-2" variant="text" @click.stop="clear">clear</v-btn>
     </div>
-    <v-divider class="mb-3 mt-1" />
+    <v-divider class="mb-3 mt-3" />
     <div class="mb-5">
       <h4>Statistics</h4>
       <div class="v-row">

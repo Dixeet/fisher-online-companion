@@ -10,7 +10,7 @@
           icon
           size="small"
           density="comfortable"
-          @click.stop="toggleCurrent"
+          @click.stop="chooseTackle"
         >
           <v-icon size="small">
             <i-mdi-close v-if="isCurrentTackle"></i-mdi-close>
@@ -134,9 +134,13 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  modifyCurrent: {
+    type: Boolean,
+    default: true,
+  },
 });
 
-defineEmits(['edit', 'clear']);
+const emit = defineEmits(['edit', 'clear', 'tackleChosen']);
 
 const pars = useEquipmentInfosShort();
 const currentTackle = useStorage('currentTackle', {}, undefined, { shallow: true });
@@ -150,6 +154,13 @@ function toggleCurrent() {
   } else {
     currentTackle.value = props.tackle;
   }
+}
+
+function chooseTackle() {
+  if (props.modifyCurrent) {
+    toggleCurrent();
+  }
+  emit('tackleChosen', props.tackle);
 }
 </script>
 

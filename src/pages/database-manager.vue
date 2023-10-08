@@ -167,13 +167,14 @@ function refetchData() {
 
 function deleteClick() {
   dialog.text =
-    'You are about to <strong>delete all data</strong> in the database <br />Including your own';
+    'You are about to <strong>delete</strong> the database. You may want to export your data first';
   dialog.continueFn = deleteDatabase;
   openDialog.value = true;
 }
 
 function clearDataClick() {
-  dialog.text = 'You are about to <strong>delete data saved</strong> into the database';
+  dialog.text =
+    'You are about to <strong>delete data saved</strong> into the database. You may want to export it first';
   dialog.continueFn = clearData;
   openDialog.value = true;
 }
