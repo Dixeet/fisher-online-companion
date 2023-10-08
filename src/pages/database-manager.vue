@@ -4,6 +4,7 @@
     <v-divider class="mt-2 mb-3" />
     <div class="d-inline-flex flex-wrap justify-center" style="gap: 10px">
       <v-btn
+        v-if="mode === 'development'"
         class="flex-grow-1"
         rounded="0"
         variant="tonal"
@@ -86,6 +87,7 @@
         :prepend-icon="IconImport"
       ></v-file-input>
       <v-btn
+        v-if="files?.length"
         alt="Import"
         class="flex-grow-1"
         rounded="0"
@@ -120,6 +122,7 @@ import IconImport from '~icons/mdi/database-arrow-down';
 import { inject, reactive, ref } from 'vue';
 import { useDb, useDeleteDbData, useFetchDbData } from '~/composables/useDb.js';
 import { useNotify } from '~/composables/useNotify.js';
+import { useRouter } from 'vue-router';
 
 const openDialog = ref(false);
 const loadingDelete = ref(false);
@@ -137,6 +140,8 @@ const dataSelected = reactive({
   catches: false,
 });
 const db = useDb();
+const mode = ref(import.meta.env.MODE);
+const router = useRouter();
 
 function deleteDatabase() {
   if (database?.name) {
@@ -148,6 +153,7 @@ function deleteDatabase() {
       // eslint-disable-next-line no-console
       console.log(`Database ${database?.name} deleted successfully`);
       localStorage.clear();
+      router.go();
     };
     deleteDbReq.onerror = () => {
       openDialog.value = false;

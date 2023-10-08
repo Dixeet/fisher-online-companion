@@ -100,7 +100,7 @@ function add() {
     })
     .then(() => {
       useNotify('Catch added', 'success');
-      router.back();
+      router.push({ path: '/' });
     });
 }
 </script>

@@ -84,6 +84,10 @@ a {
   white-space: nowrap;
 }
 
+ol, ul {
+  list-style-position: inside;
+}
+
 @media (hover: none) {
   .a-fish-card {
     &:hover &__icon--hover {

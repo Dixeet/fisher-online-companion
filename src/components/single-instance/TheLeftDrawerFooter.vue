@@ -19,6 +19,11 @@
     >
       Fisher Online™ Game
     </a>
+    <v-btn rounded="0" :active="false" density="comfortable" variant="text" icon to="/help">
+      <v-icon size="small">
+        <i-mdi-help-circle></i-mdi-help-circle>
+      </v-icon>
+    </v-btn>
   </div>
 </template>
 
