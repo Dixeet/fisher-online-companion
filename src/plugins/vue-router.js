@@ -57,6 +57,15 @@ const routes = [
       title: 'Database Manager',
     },
   },
+  {
+    path: '/help',
+    component: () => import('~/pages/help.vue'),
+    name: 'Help',
+    meta: {
+      documentTitle: `Help - ${mainTitle}`,
+      title: 'Help',
+    },
+  },
 ];
 
 const router = createRouter({
