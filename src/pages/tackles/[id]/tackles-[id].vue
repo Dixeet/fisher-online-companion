@@ -172,6 +172,9 @@ function onChoose(equipment) {
     tackle.value.hook = { ...newTackle.hook };
     tackle.value.bait = { ...newTackle.bait };
   }
+  if (equipment.mainType === 'rod' && !tackle.value.name) {
+    tackle.value.name = equipment.name;
+  }
   close();
 }
 
