@@ -1,6 +1,6 @@
 {
   "name": "fisher-online-companion",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "FOC - Fisher Online Companion",
   "main": "parsers/parse.js",
   "type": "module",
