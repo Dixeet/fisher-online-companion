@@ -38,12 +38,6 @@
         label="Fishes on location"
       ></v-checkbox>
       <v-checkbox
-        v-model="dataSelected.tackles"
-        hide-details
-        density="compact"
-        label="Tackles"
-      ></v-checkbox>
-      <v-checkbox
         v-model="dataSelected.catches"
         hide-details
         density="compact"
@@ -136,7 +130,6 @@ const dialog = reactive({
 });
 const dataSelected = reactive({
   mapFishes: false,
-  tackles: false,
   catches: false,
 });
 const db = useDb();

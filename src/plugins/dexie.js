@@ -59,6 +59,14 @@ function migrate(db) {
     catches: '++id,mapId,fishId',
   });
 
+  db.version(6)
+    .stores({
+      tackles: null,
+    })
+    .upgrade(() => {
+      return localStorage.clear();
+    });
+
   /*
   To refresh with new data,
   use code below and increment VERSION_NUMBER according to the previous one

@@ -35,32 +35,6 @@
                   <i-game-fishing></i-game-fishing>
                 </v-icon>
               </v-btn>
-              <v-btn
-                alt="Add a catch"
-                class="tooltip"
-                data-text="Add a catch"
-                icon
-                variant="plain"
-                density="comfortable"
-                :to="`/maps/${map.id}/${fish.id}/add-catch`"
-              >
-                <v-icon>
-                  <i-game-lucky-fisherman></i-game-lucky-fisherman>
-                </v-icon>
-              </v-btn>
-              <v-btn
-                alt="List catches"
-                class="tooltip"
-                data-text="List"
-                icon
-                variant="plain"
-                density="comfortable"
-                :to="`/maps/${map.id}/${fish.id}`"
-              >
-                <v-icon>
-                  <i-game-fish-bucket></i-game-fish-bucket>
-                </v-icon>
-              </v-btn>
             </div>
           </template>
         </FishCard>
@@ -73,7 +47,7 @@
 import IconMinus from '~icons/mdi/minus-circle-outline';
 import { useFishesInMap } from '~/composables/useFishesInMap.js';
 import { useStorage } from '@vueuse/core';
-import { toRaw, watchEffect } from 'vue';
+import { watchEffect } from 'vue';
 import { useState } from '~/composables/useState.js';
 import { useNotify } from '~/composables/useNotify.js';
 import { useDb } from '~/composables/useDb.js';
@@ -81,7 +55,6 @@ import { useDb } from '~/composables/useDb.js';
 const title = useState('title');
 const map = useStorage('currentMap', {}, undefined, { shallow: true });
 const { fishesInMap: fishes, removeFishFromMap } = useFishesInMap(map);
-const currentTackle = useStorage('currentTackle', {}, undefined, { shallow: true });
 const currentPosition = useStorage('currentPosition', '');
 const db = useDb();
 
@@ -94,7 +67,6 @@ function quickAddCatch(fish) {
     .add({
       mapId: map.value.id,
       fishId: fish.id,
-      tackle: structuredClone(toRaw(currentTackle.value)),
       position: currentPosition.value,
     })
     .then(() => {

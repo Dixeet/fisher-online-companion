@@ -3,8 +3,6 @@
     <div class="h-100 d-flex flex-column justify-space-between">
       <div>
         <TheMapSelector> </TheMapSelector>
-        <TheCurrentTackle class="" />
-        <v-btn active variant="flat" class="mb-5" to="/tackles" rounded="0" block>Tackles</v-btn>
         <TheCurrentPosition class="px-2" />
       </div>
       <TheLeftDrawerFooter />
@@ -14,7 +12,6 @@
 
 <script setup>
 import { useVModel } from '@vueuse/core';
-import TheCurrentPosition from '~/components/single-instance/TheCurrentPosition.vue';
 
 const props = defineProps({
   modelValue: {
