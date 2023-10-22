@@ -17,26 +17,6 @@ const routes = [
     meta: { documentTitle: `Add fishes to location - ${mainTitle}`, customKey: (to) => to.path },
   },
   {
-    path: '/maps/:id/:fishId/add-catch',
-    component: () => import('~/pages/maps/[id]/[fishId]/maps-[id]-[fishId]-add.vue'),
-    name: 'MapAddCatch',
-    meta: {
-      documentTitle: `Add a catch - ${mainTitle}`,
-      title: 'Add a catch',
-      customKey: (to) => to.path,
-    },
-  },
-  {
-    path: '/maps/:id/:fishId',
-    component: () => import('~/pages/maps/[id]/[fishId]/maps-[id]-[fishId].vue'),
-    name: 'ListCatches',
-    meta: {
-      documentTitle: `List catches - ${mainTitle}`,
-      title: 'List catches',
-      customKey: (to) => to.path,
-    },
-  },
-  {
     path: '/database-manager',
     component: () => import('~/pages/database-manager.vue'),
     name: 'DatabaseManager',
