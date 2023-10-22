@@ -15,44 +15,44 @@
         ></v-icon>
       </li>
       <li>
-        Click on "Tackles" and create one or more tackle (if you leave the name empty, by default it
-        will copy the rod name)
-      </li>
-      <li>
-        On the tackles page click on one of
-        <v-icon color="success" size="small"><i-mdi-check></i-mdi-check></v-icon> to select the
-        tackle as your current tackle. You can then modify your current tackle on the left bar.
-      </li>
-      <li>
-        Go back to the main page ("Go Fishing" or
-        <v-icon><i-game-boat-fishing></i-game-boat-fishing></v-icon>)
+        Choose your current bait / lure by clicking on
+        <v-btn class="flex-grow-1 mr-1" rounded="0" size="x-small" color="primary" variant="tonal">
+          Bait
+        </v-btn>
+        <v-btn class="flex-grow-1" rounded="0" size="x-small" color="primary" variant="tonal">
+          Lure
+        </v-btn>
       </li>
       <li>
         If you want you can set your current position in the game (grid coordinate eg: D5, A11
         etc..)
       </li>
       <li>
-        When you catch a fish in game, click
-        <v-icon>
-          <i-game-lucky-fisherman></i-game-lucky-fisherman>
-        </v-icon>
-        on the fish to add a catch. By default it will copy your current tackle, and current
-        position but you can modify them or select another saved tackle.
+        When you catch a fish, click
+        <v-btn
+          alt="Quick add a catch"
+          size="small"
+          color="primary"
+          variant="tonal"
+          density="comfortable"
+          rounded="0"
+        >
+          <template #prepend>
+            <v-icon size="large">
+              <i-game-fishing></i-game-fishing>
+            </v-icon>
+          </template>
+          Add a catch
+        </v-btn>
+        on the fish you caught. <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;It will add your current bait / lure and position as a new catch for
+        this fish.
       </li>
       <li>
-        Click on
-        <v-icon color="tertiary" size="large">
-          <i-game-fishing></i-game-fishing>
-        </v-icon>
-        to quickly add a catch (copy current tackle and current position)
+        Instead of adding a fish everytime you catch one. You can open your keepnet, and add every
+        fish with their associated bait.
       </li>
-      <li>
-        Click on
-        <v-icon>
-          <i-game-fish-bucket></i-game-fish-bucket>
-        </v-icon>
-        to list all your catches and get some statistics (top 5 most used bait/lure, and position)
-      </li>
+      <li>On each fish, you can check the list of every catch you made grouped by bait / lure.</li>
     </ol>
     <h2 id="informations" class="text-h5 mt-5">Informations</h2>
     <v-divider class="mb-5" />

@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="d-flex flex-wrap mb-5">
-      <v-btn variant="flat" to="/maps/current/add-fishes">Add Fishes To {{ map.name }}</v-btn>
+      <v-btn color="tertiary" variant="tonal" to="/maps/current/add-fishes"
+        >Add Fishes To Location</v-btn
+      >
     </div>
 
     <FishListCard :fishes="fishes">
@@ -20,21 +22,29 @@
             />
           </template>
           <template #default>
-            <div class="d-flex justify-space-between px-2 mb-2">
+            <div>
               <v-btn
                 alt="Quick add a catch"
-                class="tooltip"
-                data-text="Quick add"
-                color="tertiary"
-                icon
-                variant="text"
+                color="primary"
+                variant="tonal"
                 density="comfortable"
+                rounded="0"
+                block
+                style="min-height: 40px"
                 @click.stop="quickAddCatch(fish)"
               >
-                <v-icon size="large">
-                  <i-game-fishing></i-game-fishing>
-                </v-icon>
+                <template #prepend>
+                  <v-icon size="large">
+                    <i-game-fishing></i-game-fishing>
+                  </v-icon>
+                </template>
+                Add a catch
               </v-btn>
+              <CatchesTop
+                :fish-id="fish.id"
+                :map-id="map.id"
+                :catch-added-id="catchAddedId"
+              ></CatchesTop>
             </div>
           </template>
         </FishCard>
@@ -47,31 +57,37 @@
 import IconMinus from '~icons/mdi/minus-circle-outline';
 import { useFishesInMap } from '~/composables/useFishesInMap.js';
 import { useStorage } from '@vueuse/core';
-import { watchEffect } from 'vue';
+import { shallowRef, watchEffect } from 'vue';
 import { useState } from '~/composables/useState.js';
 import { useNotify } from '~/composables/useNotify.js';
 import { useDb } from '~/composables/useDb.js';
 
 const title = useState('title');
 const map = useStorage('currentMap', {}, undefined, { shallow: true });
+const currentBait = useStorage('currentBait', {}, undefined, { shallow: true });
 const { fishesInMap: fishes, removeFishFromMap } = useFishesInMap(map);
 const currentPosition = useStorage('currentPosition', '');
 const db = useDb();
+const catchAddedId = shallowRef(0);
 
 watchEffect(() => {
   title.value = map.value?.name ?? 'Fisher Online Companion';
 });
 
 function quickAddCatch(fish) {
-  db.catches
-    .add({
-      mapId: map.value.id,
-      fishId: fish.id,
-      position: currentPosition.value,
-    })
-    .then(() => {
-      useNotify('Catch added', 'success');
-    });
+  if (currentBait.value?.id) {
+    db.catches
+      .add({
+        mapId: map.value.id,
+        fishId: fish.id,
+        bait: currentBait.value,
+        position: currentPosition.value,
+      })
+      .then((res) => {
+        catchAddedId.value = res;
+        useNotify('Catch added', 'tertiary-container');
+      });
+  }
 }
 </script>
 <style></style>

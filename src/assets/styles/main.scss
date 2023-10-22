@@ -56,8 +56,8 @@ a {
     width: max-content;
     padding:5px 10px;
     border-radius:2px;
-    background:rgb(var(--v-theme-surface-variant));
-    color: rgb(var(--v-theme-on-surface-variant));
+    background:rgb(var(--v-theme-surface-bright));
+    color: rgb(var(--v-theme-on-surface-bright));
     text-align:center;
     opacity:0;
     transition:.3s opacity ease-out;

@@ -46,7 +46,9 @@
     },
     "overrides": [
       {
-        "files": ["src/pages/**/*.vue"],
+        "files": [
+          "src/pages/**/*.vue"
+        ],
         "rules": {
           "vue/multi-word-component-names": "off"
         }
@@ -72,6 +74,7 @@
     "vite": "^4.4.8"
   },
   "dependencies": {
+    "@rodrive/console-vlog": "^1.0.0",
     "@vueuse/core": "^10.4.1",
     "command-line-args": "^5.2.1",
     "command-line-usage": "^7.0.1",

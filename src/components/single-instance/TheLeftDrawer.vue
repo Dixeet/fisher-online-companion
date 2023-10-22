@@ -3,6 +3,7 @@
     <div class="h-100 d-flex flex-column justify-space-between">
       <div>
         <TheMapSelector> </TheMapSelector>
+        <TheCurrentBait class="my-2 mx-2"></TheCurrentBait>
         <TheCurrentPosition class="px-2" />
       </div>
       <TheLeftDrawerFooter />

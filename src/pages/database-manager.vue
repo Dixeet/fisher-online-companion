@@ -17,7 +17,7 @@
       </v-btn>
       <v-btn
         class="flex-grow-1"
-        color="accent"
+        color="error"
         rounded="0"
         variant="tonal"
         alt="Delete Database"
